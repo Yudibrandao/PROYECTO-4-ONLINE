@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
@@ -113,3 +114,14 @@
     "node_modules"
   ]
 }
+=======
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "strict": true
+    }
+  }
+  
+>>>>>>> bc6dd934008a97c47e2c1f2b22ee225a6d3ff219
