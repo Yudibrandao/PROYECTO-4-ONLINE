@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import dotenv from 'dotenv';
+import { CreateRolesTable1710339195163 } from "./migrations/1710339195163-CreateRolesTable";
 
 dotenv.config();
 
@@ -12,6 +13,6 @@ export const dataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     entities: [],
-    migrations: [], 
+    migrations: [`${__dirname}/migrations/**/*{.ts,js}`], 
 
 })
