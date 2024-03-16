@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import dotenv from 'dotenv';
-import { CreateRolesTable1710339195163 } from "./migrations/1710339195163-CreateRolesTable";
 
 dotenv.config();
 

@@ -1,7 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateUsuariosTable1710497679653 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
@@ -35,11 +34,10 @@ export class CreateUsuariosTable1710497679653 implements MigrationInterface {
                         type: "varchar",
                         length: "255",
                     },
-
                     {
                         name: "is_active",
-                        type: "bolean",
-                        length: "true",
+                        type: "boolean",
+                       
                     },
                     {
                         name: "role_id",
