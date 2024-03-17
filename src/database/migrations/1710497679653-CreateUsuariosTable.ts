@@ -14,12 +14,12 @@ export class CreateUsuariosTable1710497679653 implements MigrationInterface {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "first_name",
+                        name: "Nombre",
                         type: "varchar",
                         length: "50",
                     },
                     {
-                        name: "last_name",
+                        name: "Apellido",
                         type: "varchar",
                         length: "50",
                     },

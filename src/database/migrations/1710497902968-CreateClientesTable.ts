@@ -7,37 +7,21 @@ export class CreateClientesTable1710497679655 implements MigrationInterface {
                 name: "clientes",
                 columns: [
                     {
-                        name: "id",
-                        type: "int",
-                        isPrimary: true,
-                        isGenerated: true,
-                        generationStrategy: "increment",
+                        name:"id",
+                        type:"int",
+                        isPrimary:true,
+                        isGenerated:true,
+                        generationStrategy:"increment"
                     },
                     {
-                        name: "nombre",
-                        type: "varchar",
-                        length: "100",
+                        name:"usuario_id", 
+                        type:"int",
                     },
                     {
-                        name: "apellido",
-                        type: "varchar",
-                        length: "100",
-                    },
-                    {
-                        name: "email",
-                        type: "varchar",
-                        length: "100",
-                        isUnique: true,
-                    },
-                    {
-                        name: "telefono",
-                        type: "varchar",
-                        length: "15",
-                    },
-                    {
-                        name: "usuario_id",
-                        type: "int",
-                    },
+                        name:"area",
+                        type:"varchar",
+                        length:"50"
+                    }
                 ],
                 foreignKeys: [
                     {
