@@ -18,4 +18,5 @@ export class Cita extends BaseEntity {
     role!: Role;
     static cliente: any;
     static tatuador: any;
+    client: any;
 }

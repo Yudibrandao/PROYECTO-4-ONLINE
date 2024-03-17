@@ -7,7 +7,7 @@ export class cliente extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({ name: "nombre" })
+    @Column({ name: "user_id" })
     userID!: number;
 
     @Column({ name: "area" })
@@ -15,12 +15,12 @@ export class cliente extends BaseEntity {
 
 
     //Relation 1:1 with user
-    @OneToOne(() => User, (user) => user.id)
+    @OneToOne(() => User, (user) => user.cliente)
     @JoinColumn({ name: "user_id" })
     user!: User
 
     //Relation {1}--{0..n} with appointments
-    @OneToMany(() => Cita, (appointment) => Cita.cliente)
+    @OneToMany(() => Cita, Cita => cita.cliente)
     appointments?: Cita[];
-    static user: any;
+    
 }
