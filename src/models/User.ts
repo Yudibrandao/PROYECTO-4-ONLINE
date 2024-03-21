@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn, ManyToMany, OneToOne, OneToMany } from "typeorm"
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn, ManyToMany, OneToOne, OneToMany } from "typeorm"; 
 import {Role} from "./Role"
 import { Tatuadores } from "./Tatuador";
 import { cliente } from "./Cliente";
@@ -7,7 +7,7 @@ import { cliente } from "./Cliente";
 @Entity('usuarios')
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id!:number;
+    id!: number;
 
     @Column({name:"Nombre"})
     nombre!: string;

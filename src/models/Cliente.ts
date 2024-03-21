@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, BaseEntity } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, BaseEntity } from "typeorm";
 import { User } from "./User";
-import {Cita } from "./Cita";
+import { Cita } from "./Cita";
 
 @Entity('clientes')
 export class cliente extends BaseEntity {
@@ -15,12 +15,12 @@ export class cliente extends BaseEntity {
 
 
     //Relation 1:1 with user
-    @OneToOne(() => User, (user) => user.cliente)
+    @OneToOne(() => User, ( User ) => User.cliente)
     @JoinColumn({ name: "user_id" })
     user!: User
 
     //Relation {1}--{0..n} with appointments
-    @OneToMany(() => Cita, Cita => cita.cliente)
+    @OneToMany(() => Cita, Cita => Cita.cliente)
     appointments?: Cita[];
     
 }

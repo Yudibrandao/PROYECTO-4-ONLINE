@@ -4,7 +4,7 @@
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.18.3",
+    "express": "^4.19.1",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.2.1",
@@ -35,5 +35,5 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
   },
-  "description": ""
+  "description": "El proyecto fue elaborado para implementar por primera vez un Backend, el ojtivo principal es crear una API que administre las citas, horas de un estudio de tatuaje."
 }

@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from "typeorm";
-import { Role } from "./Role"; // Asegúrate de importar la entidad Role
+import { Role } from "./Role"; 
 
 @Entity('citas')
 export class Cita extends BaseEntity {
@@ -12,8 +12,7 @@ export class Cita extends BaseEntity {
     @Column({ name: "estado" })
     estado!: string;
 
-    // Relación con Role
-    @ManyToOne(() => Role, role => role.cita)
+    @ManyToOne(() => Role, Role => Role.cita)
     @JoinColumn({ name: "role_id" })
     role!: Role;
     static cliente: any;
