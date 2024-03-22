@@ -1,4 +1,14 @@
-import { UserFactory } from "../factories/UserFactory";
+import { RoleSeeder } from "./RoleSeeder";
+import { UserSeeder } from "./UserSeeder";
+import { TatuadorSeeder } from "./TatuadorSeeder";
+import { ClienteSeeder } from "./ClienteSeeder";
+import { CitaSeeder } from "./CitaSeeder";
 
-const users = new UserFactory().createMany(4);
-console.log(users);
+(async () =>{
+    console.log('starting seeding')
+    await new RoleSeeder().start();
+    await new UserSeeder().start();
+    await new TatuadorSeeder().start();
+    await new ClienteSeeder().start();
+    await new CitaSeeder().start();
+})()

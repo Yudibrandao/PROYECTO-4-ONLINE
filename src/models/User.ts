@@ -30,7 +30,7 @@ export class User extends BaseEntity {
     role!:Role;
 
     //Relation {1}--{0..n} clientes
-    @OneToMany(() => cliente, (Cliente) => cliente.user)
+    @OneToMany(() => cliente, (Cliente) => Cliente.user)
     cliente?: cliente[];
 
     //Relation {1}--{0..n} with tatuadores

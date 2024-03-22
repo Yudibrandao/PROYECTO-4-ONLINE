@@ -20,7 +20,7 @@ export class cliente extends BaseEntity {
     user!: User
 
     //Relation {1}--{0..n} with appointments
-    @OneToMany(() => Cita, Cita => Cita.cliente)
+    @OneToMany(() => Cita, Cita => Cita.client)
     appointments?: Cita[];
     
 }
