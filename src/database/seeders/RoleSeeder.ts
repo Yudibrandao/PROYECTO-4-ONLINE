@@ -1,14 +1,16 @@
-import { Role } from "../../models/Role";
-import { Seeder } from "./Seeder";
+// En RoleSeeder.ts
+import { Role } from '../models/Role';
 
-export class RoleSeeder extends Seeder {
-    protected async generate(): Promise<void> {
-        const roles: Partial<Role>[] = [
-            { nombre : "admin"},
-            { nombre : "tatuador"},
-            { nombre : "user"},  
+export class RoleSeeder {
+    async start(): Promise<void> {
+        // Crear roles
+        const rolesToCreate: Partial<Role>[] = [
+            { name: "admin" },
+            { name: "tatuador" },
+            { name: "user" }
         ];
-        
-        await Role.save(roles);
+
+        // Guardar roles en la base de datos
+        await Role.insert(rolesToCreate);
     }
 }

@@ -6,7 +6,7 @@ import { cliente } from "../../models/Cliente";
 import { getRandomValueFromArray } from "../../helpers/common";
 import { Cita } from "../../models/Cita";
 
-export class AppointmentSeeder extends Seeder{
+export class CitaSeeder extends Seeder{
     protected async generate():Promise<void>{
         const {TATUADORES} = SeederConfig;
         const {CLIENTE}= SeederConfig;
@@ -18,7 +18,7 @@ export class AppointmentSeeder extends Seeder{
         const appointments = new Citas().createMany(Cita);
         appointments.forEach((appointment: { artist: Tatuadores; client: cliente; }) =>{
             appointment.artist=getRandomValueFromArray(artists);
-            appointment.client=getRandomValueFromArray(clients);
+            appointment.client=getRandomValueFromArray(cliente);
         })
         await Citas.save(appointments);
     }

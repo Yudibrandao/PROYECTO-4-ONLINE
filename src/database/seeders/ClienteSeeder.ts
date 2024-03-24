@@ -5,7 +5,7 @@ import { User } from "../../models/User";
 import { getRandomValueFromArray } from "../../helpers/common";
 import { ClienteFactory } from "../factories/ClienteFactory";
 
-export class ClientSeeder extends Seeder{
+export class ClienteSeeder extends Seeder{
     protected async generate():Promise <void>{
         const {CLIENTE} = SeederConfig;
 

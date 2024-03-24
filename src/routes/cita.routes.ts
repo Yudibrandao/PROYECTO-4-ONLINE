@@ -15,7 +15,7 @@ router.put('/:id',authMiddleware, Cita.update);
 router.delete('/:id',authMiddleware, Cita.delete);
 
 //get appointments by client
-router.get('/client/cita',authMiddleware, Cita.getByLogedClient);
+router.get('/client/cita',authMiddleware, Cita.getByLogedCliente);
 
 //get appointments by artist
 router.get('/tatuador/cita',authMiddleware, Cita.getByLogedArtist);
