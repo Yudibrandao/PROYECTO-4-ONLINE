@@ -1,10 +1,10 @@
 import express, { Application } from "express";
 import cors from "cors"; // Importa cors de esta manera
 import dotenv from "dotenv";
-import { userController } from './controllers/userController';
-import apiRoutes from "./routes/api.routes";
-import baseRoutes from "./routes/base.routes";
-import { corsOptions } from "./config/cors"; // Asegúrate de importar correctamente tus opciones de cors
+import { userController } from '../controllers/userController';
+import apiRoutes from "../routes/api.routes";
+import baseRoutes from "../routes/base.routes";
+import { corsOptions } from "../config/cors"; // Asegúrate de importar correctamente tus opciones de cors
 
 dotenv.config();
 

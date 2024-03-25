@@ -11,14 +11,13 @@ export const userController = {
     //REGISTER
     async create(req:Request,res:Response){
         try {
-            const {firstName,lastName,email,phone,password,isActive} = req.body;
+            const {firstName,lastName,email,password,isActive} = req.body;
             const hashedPassword = await bcrypt.hash(password,10);
             
             const user = User.create({
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                phone: phone,
                 password:hashedPassword,
                 isActive:isActive,
                 role:UserRoles.CLIENT
@@ -38,7 +37,7 @@ export const userController = {
     async update(req:Request,res:Response){
         try {
             const userId = Number(req.params.id);
-            const {firstName,lastName,email,phone,password,isActive} = req.body;
+            const {firstName,lastName,email,password,isActive} = req.body;
             const user = await User.findOne({where:{id:userId}});
                 
             if(!user){
@@ -48,7 +47,6 @@ export const userController = {
             user.firstName = firstName;
             user.lastName = lastName;
             user.email = email;
-            user.phone = phone;
             user.password = password;
             user.isActive = isActive;
             await user.save();

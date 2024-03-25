@@ -1,12 +1,12 @@
 import express,{Request, Response} from 'express';
-import { tatuadorController } from '../controllers/tatuadorController';
+import { TatuadorController } from '../controllers/tatuadorController';
 
 const router = express.Router();
 
 //ARTISTS ROUTES
-router.get('/',tatuadorController.getAll);
+router.get('/',TatuadorController.getAll);
 
-router.post('/create', tatuadorController.create);
+router.post('/create', TatuadorController.create);
 
 
 

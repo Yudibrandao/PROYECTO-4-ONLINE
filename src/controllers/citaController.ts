@@ -1,22 +1,22 @@
 import { Request,Response } from "express";
 import { User } from "../models/User";
 import { Cita } from "../models/Cita";
-import { Tatuador } from "../models/Tatuador";
-import { cliente } from "../models/Cliente";
+import { Artist } from "../models/Artist";
+import { Client } from "../models/Client";
 import { Role } from "../models/Role";
 import bcrypt from 'bcrypt';
 import { UserRoles } from "../constants/UserRoles";
 import { Console } from "console";
 
-export const citaController = {
+export const CitaController = {
 
-    //Get all Appointments
+    //Get all Citas
     async getAll(req:Request,res:Response){
         try {
             const page = Number(req.query.page) || 1;
             const limit = Number(req.query.limit) || 10;
 
-            const [cita,totalCitas] = await Cita.findAndCount(
+            const [Citas,totalCitas] = await Cita.findAndCount(
                 {
                     select:{
                         id:true,
@@ -27,18 +27,18 @@ export const citaController = {
                 }
             );
             
-            res.json(citas);
+            res.json(Citas);
 
         }catch(error){
             res.status(500).json({message:"Something went wrong"});
         }
     },
 
-    //Get Appointment by ID
+    //Get Cita by ID
     async getById(req:Request,res:Response){
         try {
             const id = Number(req.params.id);
-            const Citas = await Cita.findOne({
+            const cita = await Cita.findOne({
                 where:{id:id},
                 select:{
                     id:true,
@@ -53,17 +53,17 @@ export const citaController = {
                 }
                 
             );
-            res.json(cita);
+            res.json(Cita);
         }catch(error){
             res.status(500).json({message:"Something went wrong"});
         }
     },
 
-    //Create Appointment
+    //Create Cita
     async create(req:Request,res:Response){
         try {
             const {day_date,description,price,artist,client} = req.body;
-            const appointment = Citas.create({
+            const Cita = Cita.create({
                 day_date:day_date,
                 description: description,
                 price:price,
@@ -71,54 +71,54 @@ export const citaController = {
                 clientID:client
             });
 
-            await cita.save();
-            res.json(appointment);
+            await Cita.save();
+            res.json(Cita);
         }catch(error){
             res.status(500).json({message:"Something went wrong"});
             
         }
     },
 
-    //Update Appointment
+    //Update Cita
     async update(req:Request,res:Response){
         try {
             const id = Number(req.params.id);
             const {day_date,description,price,artist,client} = req.body;
-            const appointment = await Appointment.findOne({where:{id:id}});
+            const Cita = await Cita.findOne({where:{id:id}});
                 
-            if(!appointment){
-                res.status(404).json({message:"Appointment not found"});
+            if(!Cita){
+                res.status(404).json({message:"Cita not found"});
                 return;
             }
-            appointment.day_date = day_date;
-            appointment.description = description;
-            appointment.price = price;
-            appointment.artistID = artist;
-            appointment.clientID = client;
-            await appointment.save();
-            res.json(appointment);
+            Cita.day_date = day_date;
+            Cita.description = description;
+            Cita.price = price;
+            Cita.artistID = artist;
+            Cita.clientID = client;
+            await Cita.save();
+            res.json(Cita);
         }catch(error){
             res.status(500).json({message:"Something went wrong"});
         }
     },
 
-    //Delete Appointment
+    //Delete Cita
     async delete(req:Request,res:Response){
         try {
             const id = Number(req.params.id);
-            const appointment = await Appointment.findOne({where:{id:id}});
-            if(!appointment){
-                res.status(404).json({message:"Appointment not found"});
+            const Cita = await Cita.findOne({where:{id:id}});
+            if(!Cita){
+                res.status(404).json({message:"Cita not found"});
                 return;
             }
-            await appointment.remove();
-            res.json({message:"Appointment deleted"});
+            await Cita.remove();
+            res.json({message:"Cita deleted"});
         }catch(error){
             res.status(500).json({message:"Something went wrong"});
         }
     },
 
-    //Get all Appointments by Client
+    //Get all Citas by Client
     
     async getByLogedClient(req:Request,res:Response){
 
@@ -133,8 +133,8 @@ export const citaController = {
             userID:req.tokenData!.userId
         }});
 
-        console.log(req.tokenData);
-    const appointments = await Appointment.find({
+        console.log("CLIENT", logedClient);
+    const Citas = await Cita.find({
         relations:{
             artist:{
                 user:true
@@ -171,11 +171,11 @@ export const citaController = {
             clientID:logedClient!.id
         }});
 
-        res.json(appointments);
+        res.json(Citas);
 
     },
 
-    //Get all Appointments by Loged Artist
+    //Get all Citas by Loged Artist
     async getByLogedArtist(req:Request,res:Response){
         const artist = await Artist.findOne({
             select:{
@@ -187,7 +187,7 @@ export const citaController = {
             console.log(req.tokenData);
             console.log(artist);
     
-        const appointments = await Appointment.find({
+        const Citas = await Cita.find({
             relations:{
                 artist:true,
                 client:true,
@@ -219,7 +219,7 @@ export const citaController = {
                 }
                 
             });
-            res.json(appointments).status(200);
+            res.json(Citas).status(200);
     
         }
 

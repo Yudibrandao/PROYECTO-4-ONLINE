@@ -15,7 +15,7 @@ export class CitaSeeder extends Seeder{
         const artists= await Tatuadores.find();
         const clients= await cliente.find();
 
-        const appointments = new Citas().createMany(Cita);
+        const citas = new Citas().createMany(Cita);
         appointments.forEach((appointment: { artist: Tatuadores; client: cliente; }) =>{
             appointment.artist=getRandomValueFromArray(artists);
             appointment.client=getRandomValueFromArray(cliente);

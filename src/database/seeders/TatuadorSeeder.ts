@@ -3,7 +3,7 @@ import { Seeder } from "./Seeder";
 import { Tatuadores } from "../../models/Tatuador";
 import { User } from "../../models/User";
 import { getRandomValueFromArray } from "../../helpers/common";
-import { Tatuadore} from "../factories/TatuadorFactory";
+import { Tatuador} from "../factories/TatuadorFactory";
 import { TatuadoresFactory } from "../factories/TatuadorFactory";
 
 
