@@ -1,21 +1,21 @@
-import { Tatuadores } from "../../models/Tatuador";
+import { Tatuador } from "../../models/Tatuador";
+import {faker} from "@faker-js/faker";
 import { Factory } from "./Factory";
-import { faker} from "@faker-js/faker"; 
 
-export class TatuadoresFactory extends Factory<Tatuadores>{
-    protected  generate(): Tatuadores {
-        return {
+export class TatuadorFactory extends Factory<Tatuador>{
+    protected generate():Tatuador{
+        return{
             style: faker.helpers.arrayElement([
-                    "Blackwork",
-                    "Old School",
-                    "Neotradicional", 
-                    "Dotwork",
-                    "Black & Grey",
-                    "Japonés Tradicional"
-                ]), 
-                area: faker.location.city()
-                
-                } as Tatuadores;
-        
+                "Neotraditional",
+                "Traditional",
+                "Trashpolka",
+                "Japanese",
+                "Blackworks",
+                "Minimalist",
+                "Realism"
+            ]),
+            area: faker.location.city()
+            
+        } as Tatuador;
     }
 }

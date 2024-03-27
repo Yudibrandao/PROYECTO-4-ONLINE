@@ -1,25 +1,25 @@
 import { SeederConfig } from "../../config/seeders";
-import { Citas } from "../factories/CitasFactory";
-import { Seeder } from "./Seeder";
-import { Tatuadores } from "../../models/Tatuador";
-import { cliente } from "../../models/Cliente";
+import { Cita } from "../factories/Cita";
+import { Seeder } from "./seeder";
+import { Tatuador } from "../../models/Tatuador";
+import { Cliente } from "../../models/Cliente";
 import { getRandomValueFromArray } from "../../helpers/common";
 import { Cita } from "../../models/Cita";
 
 export class CitaSeeder extends Seeder{
     protected async generate():Promise<void>{
-        const {TATUADORES} = SeederConfig;
-        const {CLIENTE}= SeederConfig;
-        const {CITAS} = SeederConfig;
+        const {Tatuador} = SeederConfig;
+        const {Cliente}= SeederConfig;
+        const {Cita} = SeederConfig;
 
-        const artists= await Tatuadores.find();
-        const clients= await cliente.find();
+        const Tatuadors= await Tatuador.find();
+        const Clientes= await Cliente.find();
 
-        const citas = new Citas().createMany(Cita);
-        appointments.forEach((appointment: { artist: Tatuadores; client: cliente; }) =>{
-            appointment.artist=getRandomValueFromArray(artists);
-            appointment.client=getRandomValueFromArray(cliente);
+        const Citas = new Cita().createMany(Cita);
+        Citas.forEach((Cita: { Tatuador: Tatuador; Cliente: Cliente; }) =>{
+            Cita.Tatuador=getRandomValueFromArray(Tatuador);
+            Cita.Cliente=getRandomValueFromArray(Cliente);
         })
-        await Citas.save(appointments);
+        await Cita.save(Cita);
     }
 }

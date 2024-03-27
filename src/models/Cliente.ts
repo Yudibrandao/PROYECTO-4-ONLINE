@@ -1,26 +1,27 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn,Column,OneToOne,JoinColumn,OneToMany, BaseEntity } from "typeorm"
 import { User } from "./User";
 import { Cita } from "./Cita";
 
-@Entity('clientes')
-export class cliente extends BaseEntity {
+@Entity('Cliente')
+export class Cliente extends BaseEntity{
     @PrimaryGeneratedColumn()
-    id!: number;
+    id!:number;
 
-    @Column({ name: "user_id" })
+    @Column({name:"user_id"})
     userID!: number;
 
-    @Column({ name: "area" })
+    @Column({name:"area"})
     area!: string;
 
-
-    //Relation 1:1 with user
-    @OneToOne(() => User, ( User ) => User.cliente)
-    @JoinColumn({ name: "user_id" })
-    user!: User
-
-    //Relation {1}--{0..n} with appointments
-    @OneToMany(() => Cita, Cita => Cita.client)
-    appointments?: Cita[];
     
+    //Relation: Client {1}--{1} User
+    @OneToOne(()=>User,(user)=>user.id)
+    @JoinColumn({name:"user_id"})
+    user!:User
+
+    //Relation Client {1}--{0..n} Citas
+    @OneToMany(() => Cita, (Cita) => Cita.cliente)
+    Citas?: Cita[];
+
+   
 }

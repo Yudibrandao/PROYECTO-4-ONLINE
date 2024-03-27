@@ -1,11 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateClientesTable1710497679655 implements MigrationInterface {
+    
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "clientes",
-                columns: [
+                name:"cliente",
+                columns:[
                     {
                         name:"id",
                         type:"int",
@@ -14,7 +15,7 @@ export class CreateClientesTable1710497679655 implements MigrationInterface {
                         generationStrategy:"increment"
                     },
                     {
-                        name:"usuario_id", 
+                        name:"user_id",
                         type:"int",
                     },
                     {
@@ -23,20 +24,20 @@ export class CreateClientesTable1710497679655 implements MigrationInterface {
                         length:"50"
                     }
                 ],
-                foreignKeys: [
+                foreignKeys:[
                     {
-                        columnNames: ["usuario_id"],
-                        referencedTableName: "usuarios",
-                        referencedColumnNames: ["id"],
-                        onDelete: "CASCADE",
+                        columnNames:["user_id"],
+                        referencedTableName: "users",
+                        referencedColumnNames:["id"]
                     },
-                ],
-            }),
-            true
-        );
+                    
+                ]
+            })
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("clientes");
+        await queryRunner.dropTable("cliente");
     }
+
 }

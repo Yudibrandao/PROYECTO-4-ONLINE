@@ -8,9 +8,12 @@ El proyecto fue elaborado para implementar por primera vez un Backend, el ojtivo
 
 
 # DIAGRAMA BACKEND  
- ![Imagen] = 
+![Imagen][def]
 
 
 
 
 
+
+
+[def]: DiagramaDB.jpg

@@ -1,57 +1,59 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateCitasTable1710497679656 implements MigrationInterface {
+    
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "citas",
-                columns: [
+                name:"citas",
+                columns:[
                     {
-                        name: "id",
-                        type: "int",
-                        isPrimary: true,
-                        isGenerated: true,
-                        generationStrategy: "increment",
+                        name:"id",
+                        type:"int",
+                        isPrimary:true,
+                        isGenerated:true,
+                        generationStrategy:"increment"
                     },
                     {
-                        name: "fecha",
-                        type: "timestamp",
-                        default: "CURRENT_TIMESTAMP",
+                        name:"day_date",
+                        type:"datetime",
                     },
                     {
-                        name: "estado",
-                        type: "varchar",
-                        length: "50",
+                        name:"artist_id",
+                        type:"int"
                     },
                     {
-                        name: "cliente_id",
-                        type: "int",
+                        name:"client_id",
+                        type:"int"
                     },
                     {
-                        name: "tatuador_id",
-                        type: "int",
+                        name:"description",
+                        type:"varchar",
+                        length:"200"
                     },
+                    {
+                        name:"price",
+                        type:"int",
+                    }
                 ],
-                foreignKeys: [
+                foreignKeys:[
                     {
-                        columnNames: ["cliente_id"],
-                        referencedTableName: "clientes",
-                        referencedColumnNames: ["id"],
-                        onDelete: "CASCADE",
-                    },
-                    {
-                        columnNames: ["tatuador_id"],
+                        columnNames:["artist_id"],
                         referencedTableName: "tatuadores",
-                        referencedColumnNames: ["id"],
-                        onDelete: "CASCADE",
+                        referencedColumnNames:["id"]
                     },
-                ],
-            }),
-            true
-        );
+                    {
+                        columnNames:["client_id"],
+                        referencedTableName: "clientes",
+                        referencedColumnNames:["id"]
+                    }
+                ]
+            })
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable("citas");
     }
+
 }

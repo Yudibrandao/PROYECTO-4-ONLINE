@@ -2,8 +2,7 @@ import { RoleSeeder } from "./RoleSeeder";
 import { UserSeeder } from "./UserSeeder";
 import { TatuadorSeeder } from "./TatuadorSeeder";
 import { ClienteSeeder } from "./ClienteSeeder";
-import { CitaSeeder } from "./CitaSeeder";
-
+import { TatuadorSeeder } from "./TatuadorSeeder";
 
 (async () =>{
     console.log('starting seeding')
@@ -11,5 +10,5 @@ import { CitaSeeder } from "./CitaSeeder";
     await new UserSeeder().start();
     await new TatuadorSeeder().start();
     await new ClienteSeeder().start();
-    await new CitaSeeder().start();
+    await new TatuadorSeeder().start();
 })()

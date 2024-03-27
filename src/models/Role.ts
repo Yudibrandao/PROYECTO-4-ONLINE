@@ -1,7 +1,7 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn,Column, OneToMany } from "typeorm"
 import { User } from "./User";
 
-@Entity('role')
+@Entity('roles')
 export class Role extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
@@ -9,9 +9,8 @@ export class Role extends BaseEntity {
     @Column({name:"name"})
     name!: string;
 
-    // Relation 1:N con tabla user
+    // Relation Role {1}--{0..n} Users
     @OneToMany(()=> User,(user)=>user.role)
     user!:User[];
-    cita: any;
 
 }

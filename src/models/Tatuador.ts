@@ -1,30 +1,29 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, BaseEntity, OneToMany } from "typeorm"
+import { Entity,Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, BaseEntity, OneToMany } from "typeorm"
 import { User } from "./User"
 import { Cita } from "./Cita"
 
-@Entity('tatuadores')
-export class Tatuadores extends BaseEntity {
+@Entity('artists')
+export class Artist extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id!: number;
+    id!:number;
 
-    @Column({ name: "user_id" })
+    @Column({name:"user_id"})
     userID!: number;
 
-    @Column({ name: "style" })
+    @Column({name:"style"})
     style!: string;
 
-    @Column({ name: "area" })
+    @Column({name:"area"})
     area!: string;
 
 
-    //Relation 1:1 with user
-    @OneToOne(() => User, (user) => user.id)
-    @JoinColumn({ name: "user_id" })
-    user!: User
+    //Relation Artist {1}--{1} User
+    @OneToOne(()=>User,(user)=>user.id)
+    @JoinColumn({name:"user_id"})
+    user!:User
 
-
-    //Relation {1}--{0..n} with appointments
-    @OneToMany(() => Cita, (appointment) => Cita.tatuador)
-    appointments?: Cita[];
-    static user: any;
+    // Relation: Artist {1}--{0..n} Citas
+    @OneToMany(() => Cita, (Cita) => Cita.artist)
+    Citas?: Cita[];
+    
 }

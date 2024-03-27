@@ -1,32 +1,33 @@
+import express from 'express';
+import { citaController } from '../controllers/citaController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { authorizeMiddleware } from '../middlewares/authorize';
-import { Cita } from '../models/Cita';
 const router = express.Router();
 
+/////////      CITAS ROUTES      //////////////////
+
+//create cita
+router.post('/create',authMiddleware, authorizeMiddleware(["artist"]), citaController.create);
+
+//edit cita
+router.put('/:id',authMiddleware, authorizeMiddleware(["artist"]), citaController.update);
+
+//delete cita
+router.delete('/:id',authMiddleware, authorizeMiddleware(["client","artist"]), citaController.delete);
+
+//get citas by client
+router.get('/client/citas',authMiddleware, authorizeMiddleware(["client"]), citaController.getByLogedClient);
+
+//get citas by artist
+router.get('/artist/cita',authMiddleware, authorizeMiddleware(["artist"]), citaController.getByLogedArtist);
 
 
-//create appointment
-router.post('/create',authMiddleware, Cita.create);
+//////////////////// PROTECTED ROUTES //////////////////////
 
-//edit appointment
-router.put('/:id',authMiddleware, Cita.update);
+//get all citas
+router.get('/',authMiddleware,authorizeMiddleware(["admin"]), citaController.getAll);
 
-//delete appointment
-router.delete('/:id',authMiddleware, Cita.delete);
-
-//get appointments by client
-router.get('/client/cita',authMiddleware, Cita.getByLogedCliente);
-
-//get appointments by artist
-router.get('/tatuador/cita',authMiddleware, Cita.getByLogedArtist);
-
-
-//PROTECTED ROUTES 
-
-//get all appointments
-router.get('/',authMiddleware,authorizeMiddleware(["Admin"]), Cita.getAll);
-
-//get appointmentbyid
-router.get('/:id',authMiddleware,authorizeMiddleware(["Admin"]), Cita.getById);
+//get cita by id
+router.get('/:id',authMiddleware,authorizeMiddleware(["admin"]), citaController.getById);
 
 export default router;

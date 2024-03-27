@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Tatuadores } from "../models/Tatuador";
+import { Tatuador } from "../models/Tatuador";
 import { UserRoles } from "../constants/UserRoles";
 import { User } from "../models/User";
 
@@ -10,7 +10,7 @@ export const TatuadorController = {
             const page = Number(req.query.page) ||1;
             const limit = Number(req.query.limit) || 10;
 
-            const artists = await Tatuadores.findAndCount(
+            const Tatuadors = await Tatuador.findAndCount(
                 {   
                     relations:{
                         user:true
@@ -25,7 +25,7 @@ export const TatuadorController = {
                     }
                 }
             );
-            res.json(Tatuadores);
+            res.json(Tatuador);
 
         }catch(error){
             res.status(500).json({message:"Something went wrong"});
@@ -37,7 +37,7 @@ export const TatuadorController = {
             const {firstName, email, password, phone,style,area} = req.body;
 
             if(!firstName || !email || !password || !phone){
-                res.status(400).json({message:"Failed to create artist"});
+                res.status(400).json({message:"Failed to create Tatuador"});
                 return;
             }
 
@@ -52,21 +52,20 @@ export const TatuadorController = {
                 firstName:firstName,
                 email:email,
                 password:password,
-                phone:phone,
-                role:UserRoles.ARTIST
+                role:UserRoles.Tatuador
             });
 
             await User.save(user);
 
-            const artist = Tatuador.create({
+            const tatuador = Tatuador.create({
                 style:style,
                 area:area,
                 user:user
             });
 
-            await Tatuadores.save(artist);
+            await Tatuador.save(Tatuador);
 
-            res.status(201).json({message:"Artist created succesfully"});
+            res.status(201).json({message:"Tatuador created succesfully"});
 
 
         }catch(error){}

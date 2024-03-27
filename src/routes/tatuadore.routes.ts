@@ -1,13 +1,19 @@
 import express,{Request, Response} from 'express';
-import { TatuadorController } from '../controllers/tatuadorController';
+import { tatuadorController } from '../controllers/tatuadorController';
+import { authorizeMiddleware } from '../middlewares/authorize';
+import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 
-//ARTISTS ROUTES
-router.get('/',TatuadorController.getAll);
+/////////      tatuadorS ROUTES      //////////////////
 
-router.post('/create', TatuadorController.create);
+// get all tatuadors
+router.get('/',authMiddleware,tatuadorController.getAll);
 
+///////////     PROTECTED ROUTES    /////////////////////
+
+//create tatuador
+router.post('/create',authorizeMiddleware(["Admin"]),tatuadorController.create);
 
 
 export default router;

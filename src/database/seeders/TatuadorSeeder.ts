@@ -1,15 +1,14 @@
 import { SeederConfig } from "../../config/seeders";
-import { Seeder } from "./Seeder";
-import { Tatuadores } from "../../models/Tatuador";
+import { Seeder } from "./seeder";
+import { Tatuador } from "../../models/Tatuador";
 import { User } from "../../models/User";
 import { getRandomValueFromArray } from "../../helpers/common";
-import { Tatuador} from "../factories/TatuadorFactory";
-import { TatuadoresFactory } from "../factories/TatuadorFactory";
+import { TatuadorFactory } from "../factories/TatuadorFactory";
 
 
 export class TatuadorSeeder extends Seeder{
     protected async generate():Promise <void>{
-        const {TATUADOR} = SeederConfig;
+        const {Tatuador} = SeederConfig;
 
         const users = await User.find(
             {
@@ -20,10 +19,10 @@ export class TatuadorSeeder extends Seeder{
                 }
             }
         );
-        const artists = new TatuadoresFactory().createMany(TATUADOR);
-        artists.forEach((artist: { user: User; }) =>{
-            artist.user= getRandomValueFromArray(users)
+        const Tatuadors = new TatuadorFactory().createMany(Tatuador);
+        Tatuadors.forEach((Tatuador: { user: User; }) =>{
+            Tatuador.user= getRandomValueFromArray(users)
         })
-        await Tatuador.save(artists);
+        await Tatuador.save(Tatuador);
     }
 }
