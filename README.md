@@ -24,7 +24,7 @@ El proyecto fue elaborado para implementar por primera vez un Backend, el ojtivo
 
  </div>
 
- 
+
 
 # VISTA VISUAL STUDIO CODE
 ![Imagen](/VisualCodeProyecto4.png)
@@ -32,7 +32,7 @@ El proyecto fue elaborado para implementar por primera vez un Backend, el ojtivo
 
 
 # DIAGRAMA BACKEND  
-![Imagen DB](/digramaDB.jpg)
+![Imagen DB](/DiagramaTatto.png)
 
 
 # REQUISITOS DEL PROYECTO 
