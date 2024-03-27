@@ -26,7 +26,7 @@ El proyecto fue elaborado para implementar por primera vez un Backend, el ojtivo
 
 
 # DIAGRAMA BACKEND  
-![Imagen](/digramaDB.jpg)
+![Imagen DB](/digramaDB.jpg)
 
 
 # VISTA VISUAL STUDIO CODE
