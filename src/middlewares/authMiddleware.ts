@@ -7,7 +7,7 @@ export const authMiddleware = (
     res: Response,
     next: NextFunction
 ) => {
-    // Split the token from the header    
+    // Split the token from the header    n
     const token = req.headers.authorization?.split(" ")[1];
 
     // If there is no token, return a 401 status

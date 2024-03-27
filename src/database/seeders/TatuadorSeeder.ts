@@ -6,9 +6,9 @@ import { getRandomValueFromArray } from "../../helpers/common";
 import { TatuadorFactory } from "../factories/TatuadorFactory";
 
 
-export class TatuadorSeeder extends Seeder{
+export class TATUADORESSeeder extends Seeder{
     protected async generate():Promise <void>{
-        const {Tatuador} = SeederConfig;
+        const {TATUADORES} = SeederConfig;
 
         const users = await User.find(
             {
@@ -19,10 +19,10 @@ export class TatuadorSeeder extends Seeder{
                 }
             }
         );
-        const Tatuadors = new TatuadorFactory().createMany(Tatuador);
-        Tatuadors.forEach((Tatuador: { user: User; }) =>{
-            Tatuador.user= getRandomValueFromArray(users)
+        const TATUADORESs = new TatuadorFactory().createMany(TATUADORES);
+        TATUADORES.forEach((TATUADORES: { user: User; }) =>{
+            TATUADORES.user= getRandomValueFromArray(users)
         })
-        await Tatuador.save(Tatuador);
+        await TATUADORES.save(TATUADORES);
     }
 }

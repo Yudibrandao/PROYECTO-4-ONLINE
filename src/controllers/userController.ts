@@ -160,5 +160,5 @@ export const userController = {
         }
     },
 
-    async
+   
 }

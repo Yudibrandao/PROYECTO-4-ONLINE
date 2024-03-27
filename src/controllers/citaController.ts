@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
 import { Cita } from "../models/Cita";
-import { Tatuador } from "../models/Tatuador"; // Corregir aquí
+import { Tatuador } from "../models/Tatuador";
 import { Cliente } from "../models/Cliente";
 import { Role } from "../models/Role";
 import bcrypt from 'bcrypt';
