@@ -5,24 +5,23 @@ import { User } from "../../models/User";
 import { getRandomValueFromArray } from "../../helpers/common";
 import { TatuadorFactory } from "../factories/TatuadorFactory";
 
+export class TatuadorSeeder extends Seeder {
+    protected async generate(): Promise<void> {
+        const { TATUADORES } = SeederConfig;
 
-export class TATUADORESSeeder extends Seeder{
-    protected async generate():Promise <void>{
-        const {TATUADORES} = SeederConfig;
-
-        const users = await User.find(
-            {
-                where:{
-                    role:{
-                        id:2
-                    }
+        const users = await User.find({
+            where: {
+                role: {
+                    id: 2
                 }
             }
-        );
-        const TATUADORESs = new TatuadorFactory().createMany(TATUADORES);
-        TATUADORES.forEach((TATUADORES: { user: User; }) =>{
-            TATUADORES.user= getRandomValueFromArray(users)
-        })
-        await TATUADORES.save(TATUADORES);
+        });
+
+        const tatuadores = new TatuadorFactory().createMany(TATUADORES);
+        tatuadores.forEach((tatuador) => {
+            tatuador.user = getRandomValueFromArray(users);
+        });
+
+        await Tatuador.save(tatuadores);
     }
 }
