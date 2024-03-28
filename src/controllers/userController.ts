@@ -4,6 +4,8 @@ import { Cliente } from "../models/Cliente";
 import bcrypt from 'bcrypt';
 import { UserRoles } from "../constants/UserRoles";
 
+
+
 export const userController = {
     async create(req: Request, res: Response) {
         try {

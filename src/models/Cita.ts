@@ -1,35 +1,34 @@
-import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm"
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from "typeorm";
 import { Tatuador } from "./Tatuador";
 import { Cliente } from "./Cliente";
 
 @Entity('Cita')
-export class Appointment extends BaseEntity{
+export class Appointment extends BaseEntity {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column({ name:"day_date" })
+    @Column({ name: "day_date" })
     day_date!: Date;
 
-    @Column({ name: "Tatuador_id" })
+    @Column({ name: "tatuador_id" })
     TatuadorID!: number;
 
-    @Column({name:"Cliente_id"})
+    @Column({ name: "cliente_id" })
     ClienteID!: number;
 
-    @Column({name:"description"})
+    @Column({ name: "description" })
     description!: string;
 
-    @Column({name:"price"})
+    @Column({ name: "price" })
     price!: number;
 
-    // Relation: Appointment {0..n}--{1} Tatuador
-    @ManyToOne(()=>Tatuador,(Tatuador)=>Tatuador.id)
-    @JoinColumn({name:"Tatuador_id"})
-    Tatuador!:Tatuador;
+    // Relación: Appointment {0..n}--{1} Tatuador
+    @ManyToOne(() => Tatuador, (tatuador) => tatuador.id)
+    @JoinColumn({ name: "tatuador_id" })
+    Tatuador!: Tatuador;
 
-    // Relation: Appointment {0..n}--{1} Cliente
-    @ManyToOne(()=>Cliente,(Cliente)=>Cliente.id)
-    @JoinColumn({name:"Cliente_id"})
-    Cliente!:Cliente;
-
+    // Relación: Appointment {0..n}--{1} Cliente
+    @ManyToOne(() => Cliente, (cliente) => cliente.id)
+    @JoinColumn({ name: "cliente_id" })
+    Cliente!: Cliente;
 }
