@@ -1,5 +1,5 @@
 import express,{Request, Response} from 'express';
-import { tatuadorController } from '../controllers/tatuadorController';
+import { TatuadorController } from '../controllers/tatuadorController';
 import { authorizeMiddleware } from '../middlewares/authorize';
 import { authMiddleware } from '../middlewares/authMiddleware';
 
@@ -8,12 +8,12 @@ const router = express.Router();
 /////////      tatuadorS ROUTES      //////////////////
 
 // get all tatuadors
-router.get('/',authMiddleware,tatuadorController.getAll);
+router.get('/',authMiddleware,TatuadorController.getAll);
 
 ///////////     PROTECTED ROUTES    /////////////////////
 
 //create tatuador
-router.post('/create',authorizeMiddleware(["Admin"]),tatuadorController.create);
+router.post('/create',authorizeMiddleware(["Admin"]),TatuadorController.create);
 
 
 export default router;

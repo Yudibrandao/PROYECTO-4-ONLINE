@@ -116,6 +116,28 @@ export const userController = {
         }
     },
 
+
+    async editUserRole(req: Request, res: Response) {
+        try {
+            const userId = Number(req.params.id);
+            const { role } = req.body;
+            const user = await User.findOne({ where: { id: userId } });
+    
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+    
+            
+            user.role = role;
+            await user.save();
+    
+            res.status(200).json({ message: "User role updated successfully" });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Something went wrong" });
+        }
+    },
+    
     async getLogedUser(req: Request, res: Response) {
         try {
             const userId = req.tokenData?.userId;
@@ -142,7 +164,7 @@ export const userController = {
     async updateLogedUser(req: Request, res: Response) {
         try {
             const userId = req.tokenData?.userId;
-            const { firstName, lastName, email, phone, isActive } = req.body;
+            const { firstName, lastName, email, isActive } = req.body;
             const user = await User.findOne({ where: { id: userId } });
 
             if (!user) {

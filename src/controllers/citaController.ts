@@ -1,12 +1,7 @@
 import { Request, Response } from "express";
-import { User } from "../models/User";
 import { Cita } from "../models/Cita";
 import { Tatuador } from "../models/Tatuador";
 import { Cliente } from "../models/Cliente";
-import { Role } from "../models/Role";
-import bcrypt from 'bcrypt';
-import { UserRoles } from "../constants/UserRoles";
-import { Console } from "console";
 
 export const CitaController = {
 
@@ -16,20 +11,19 @@ export const CitaController = {
             const page = Number(req.query.page) || 1;
             const limit = Number(req.query.limit) || 10;
 
-            const [Citas, totalCitas] = await Cita.findAndCount(
-                {
-                    select: {
-                        id: true,
-                        day_date: true,
-                        description: true,
-                        price: true,
-                    },
-                }
-            );
+            const [Citas, totalCitas] = await Cita.findAndCount({
+                select: {
+                    id: true,
+                    day_date: true,
+                    description: true,
+                    price: true,
+                },
+            });
 
             res.json(Citas);
 
         } catch (error) {
+            console.error(error);
             res.status(500).json({ message: "Something went wrong" });
         }
     },
@@ -40,12 +34,8 @@ export const CitaController = {
             const id = Number(req.params.id);
             const cita = await Cita.findOne({
                 relations: {
-                    Tatuador: {
-                        user: true
-                    },
-                    Cliente: {
-                        user: true
-                    },
+                    Tatuador: { user: true },
+                    Cliente: { user: true }
                 },
                 select: {
                     id: true,
@@ -71,96 +61,171 @@ export const CitaController = {
                     id: id
                 }
             });
-            if (!Cita) {
-                res.status(404).json({ message: "Cita not found" });
-                return;
+
+            if (!cita) {
+                return res.status(404).json({ message: "Cita not found" });
             }
 
-            console.log(Cita);
-
-            res.json(Cita);
+            res.json(cita);
         } catch (error) {
+            console.error(error);
             res.status(500).json({ message: "Something went wrong" });
         }
     },
 
-
-    //Create Cita
+    // Create Cita
     async create(req: Request, res: Response) {
         try {
             const { day_date, description, price, Tatuador, Cliente } = req.body;
-            const nuevaCita = Cita.create({
+            const cita = await Cita.create({
                 day_date: day_date,
                 description: description,
                 price: price,
                 TatuadorID: Tatuador,
                 ClienteID: Cliente
-            });
+            }).save();
 
-            await nuevaCita.save();
-            res.json(nuevaCita);
+            res.json(cita);
         } catch (error) {
+            console.error(error);
             res.status(500).json({ message: "Something went wrong" });
-
         }
     },
 
-    //Update Cita
+    // Update Cita
     async update(req: Request, res: Response) {
         try {
             const id = Number(req.params.id);
             const { day_date, description, price, Tatuador, Cliente } = req.body;
-            const cita = await Cita.findOne({ where: { id: id } });
+            let cita = await Cita.findOne({ where: { id: id } });
 
-            if (!Cita) {
-                res.status(404).json({ message: "Cita not found" });
-                return;
+            if (!cita) {
+                return res.status(404).json({ message: "Cita not found" });
             }
-            Cita.day_date = day_date;
-            Cita.description = description;
-            Cita.price = price;
-            Cita.TatuadorID = Tatuador;
-            Cita.ClienteID = Cliente;
-            await Cita.save();
-            res.json(Cita);
+
+            cita.day_date = day_date;
+            cita.description = description;
+            cita.price = price;
+            cita.TatuadorID = Tatuador;
+            cita.ClienteID = Cliente;
+            await cita.save();
+
+            res.json(cita);
         } catch (error) {
+            console.error(error);
             res.status(500).json({ message: "Something went wrong" });
         }
     },
 
-    //Delete Cita
+    // Delete Cita
     async delete(req: Request, res: Response) {
         try {
             const id = Number(req.params.id);
             const cita = await Cita.findOne({ where: { id: id } });
-            if (!Cita) {
-                res.status(404).json({ message: "Cita not found" });
-                return;
+
+            if (!cita) {
+                return res.status(404).json({ message: "Cita not found" });
             }
-            await Cita.remove();
+
+            await cita.remove();
             res.json({ message: "Cita deleted" });
         } catch (error) {
+            console.error(error);
             res.status(500).json({ message: "Something went wrong" });
         }
     },
 
-    //Get all Citas by Loged Cliente
-
+    // Get all Citas by Cliente
     async getByLogedCliente(req: Request, res: Response) {
+        try {
+            const logedCliente = await Cliente.findOne({
+                select: { id: true },
+                where: { userID: req.tokenData!.userId }
+            });
 
-        const reqToken = req.tokenData.userId;
+            const citas = await Cita.find({
+                relations: {
+                    Tatuador: { user: true },
+                    Cliente: { user: true }
+                },
+                select: {
+                    id: true,
+                    day_date: true,
+                    description: true,
+                    price: true,
+                    Tatuador: {
+                        id: true,
+                        user: {
+                            firstName: true,
+                            email: true,
+                         
+                        }
+                    },
+                    Cliente: {
+                        id: true,
+                        user: {
+                            firstName: true,
+                            email: true,
+                          
+                        }
+                    }
+                },
+                where: { ClienteID: logedCliente?.id }
+            });
 
-        const logedCliente = await Cliente.findOne({
-            select: {
-                id: true
-            },
-            where: {
-                userID: req.tokenData!.userId
-            }
-        });
+            res.json(citas);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Something went wrong" });
+        }
+    },
 
-        console.log(req.tokenData.userId),
-        
+
+ // Get all Citas by Loged Tatuador
+    async getByLogedTatuador(req: Request, res: Response) {
+        try {
+            const tatuador = await Tatuador.findOne({
+                select: { id: true },
+                where: { userID: req.tokenData!.userId }
+            });
+
+            const citas = await Cita.find({
+                relations: {
+                    Tatuador: { user: true },
+                    Cliente: { user: true }
+                },
+                select: {
+                    id: true,
+                    day_date: true,
+                    description: true,
+                    price: true,
+                    Tatuador: {
+                        id: true,
+                        user: {
+                            firstName: true,
+                            email: true,
+                            
+                        }
+                    },
+                    Cliente: {
+                        id: true,
+                        user: {
+                            firstName: true,
+                            email: true,
+                            
+                        }
+                    }
+                },
+                where: { TatuadorID: tatuador?.id }
+            });
+
+            res.json(citas);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Something went wrong" });
+        }
     },
 
 }
+
+

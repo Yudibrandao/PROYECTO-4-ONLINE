@@ -3,7 +3,7 @@ import { Tatuador } from "./Tatuador";
 import { Cliente } from "./Cliente";
 
 @Entity('Cita')
-export class Appointment extends BaseEntity {
+export class Cita extends BaseEntity {
     @PrimaryGeneratedColumn()
     id?: number;
 
@@ -22,12 +22,12 @@ export class Appointment extends BaseEntity {
     @Column({ name: "price" })
     price!: number;
 
-    // Relación: Appointment {0..n}--{1} Tatuador
+    // Relación: Cita {0..n}--{1} Tatuador
     @ManyToOne(() => Tatuador, (tatuador) => tatuador.id)
     @JoinColumn({ name: "tatuador_id" })
     Tatuador!: Tatuador;
 
-    // Relación: Appointment {0..n}--{1} Cliente
+    // Relación: Cita {0..n}--{1} Cliente
     @ManyToOne(() => Cliente, (cliente) => cliente.id)
     @JoinColumn({ name: "cliente_id" })
     Cliente!: Cliente;

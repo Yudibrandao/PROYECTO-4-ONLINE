@@ -2,8 +2,8 @@ import { Entity,Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, BaseEntity
 import { User } from "./User"
 import { Cita } from "./Cita"
 
-@Entity('artists')
-export class Artist extends BaseEntity {
+@Entity('Tatuador')
+export class Tatuador extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!:number;
 
@@ -17,13 +17,13 @@ export class Artist extends BaseEntity {
     area!: string;
 
 
-    //Relation Artist {1}--{1} User
+    //Relation Tatuador {1}--{1} User
     @OneToOne(()=>User,(user)=>user.id)
     @JoinColumn({name:"user_id"})
     user!:User
 
-    // Relation: Artist {1}--{0..n} Citas
-    @OneToMany(() => Cita, (Cita) => Cita.artist)
+    // Relation: Tatuador {1}--{0..n} Citas
+    @OneToMany(() => Cita, (Cita) => Cita.Tatuador)
     Citas?: Cita[];
     
 }

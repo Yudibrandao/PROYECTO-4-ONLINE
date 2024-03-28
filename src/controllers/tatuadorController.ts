@@ -20,7 +20,7 @@ export const TatuadorController = {
                         user:{
                             firstName:true,
                             email:true,
-                            phone:true,
+                            
                         },
                     }
                 }

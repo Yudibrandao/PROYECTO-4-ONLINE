@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, BaseEntity } from "typeorm";
 import { User } from "./User";
-import { Appointment } from "./Cita";
+import { Cita } from "./Cita";
 
 @Entity('Cliente')
 export class Cliente extends BaseEntity {
@@ -19,6 +19,6 @@ export class Cliente extends BaseEntity {
     user!: User;
 
     // Relación: Cliente {1}--{0..n} Citas
-    @OneToMany(() => Appointment, (Appointment) => Appointment.Cliente)
-    Citas?: Appointment[];
+    @OneToMany(() => Cita, (Cita) => Cita.Cliente)
+    Citas?: Cita[];
 }

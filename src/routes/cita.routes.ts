@@ -1,5 +1,5 @@
 import express from 'express';
-import { citaController } from '../controllers/citaController';
+import { CitaController } from '../controllers/citaController'; 
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { authorizeMiddleware } from '../middlewares/authorize';
 const router = express.Router();
@@ -7,27 +7,27 @@ const router = express.Router();
 /////////      CITAS ROUTES      //////////////////
 
 //create cita
-router.post('/create',authMiddleware, authorizeMiddleware(["artist"]), citaController.create);
+router.post('/create', authMiddleware, authorizeMiddleware(["tatuador"]), CitaController.create); 
 
 //edit cita
-router.put('/:id',authMiddleware, authorizeMiddleware(["artist"]), citaController.update);
+router.put('/:id', authMiddleware, authorizeMiddleware(["tatuador"]), CitaController.update); 
 
 //delete cita
-router.delete('/:id',authMiddleware, authorizeMiddleware(["client","artist"]), citaController.delete);
+router.delete('/:id', authMiddleware, authorizeMiddleware(["cliente", "tatuador"]), CitaController.delete); 
 
 //get citas by client
-router.get('/client/citas',authMiddleware, authorizeMiddleware(["client"]), citaController.getByLogedClient);
+router.get('/cliente/cita', authMiddleware, authorizeMiddleware(["cliente"]), CitaController.getByLogedCliente); 
 
-//get citas by artist
-router.get('/artist/cita',authMiddleware, authorizeMiddleware(["artist"]), citaController.getByLogedArtist);
+//get citas by tatuador
+router.get('/tatuador/cita', authMiddleware, authorizeMiddleware(["tatuador"]), CitaController.getByLogedTatuador); 
 
 
 //////////////////// PROTECTED ROUTES //////////////////////
 
 //get all citas
-router.get('/',authMiddleware,authorizeMiddleware(["admin"]), citaController.getAll);
+router.get('/', authMiddleware, authorizeMiddleware(["admin"]), CitaController.getAll); 
 
 //get cita by id
-router.get('/:id',authMiddleware,authorizeMiddleware(["admin"]), citaController.getById);
+router.get('/:id', authMiddleware, authorizeMiddleware(["admin"]), CitaController.getById); 
 
 export default router;
