@@ -1,5 +1,5 @@
 import { SeederConfig } from "../../config/seeders";
-import { Seeder } from "./seeder";
+import { Seeder } from "./Seeder";
 import { Tatuador } from "../../models/Tatuador";
 import { User } from "../../models/User";
 import { getRandomValueFromArray } from "../../helpers/common";

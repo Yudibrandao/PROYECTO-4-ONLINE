@@ -1,10 +1,12 @@
 import express,{Request, Response} from 'express';
+import { authController } from '../controllers/authController';
 
 const router = express.Router();
 
 //////////////////////////////////////////a
-router.get('/',(req:Request,res:Response)=>{
-    res.send('Welcome to the API');
-})
+router.post('/login',authController.login)
+
+// router.post('/register',authController.register);
+
 
 export default router;

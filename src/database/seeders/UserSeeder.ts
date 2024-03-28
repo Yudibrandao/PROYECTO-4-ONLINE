@@ -2,7 +2,7 @@ import { SeederConfig } from "../../config/seeders";
 import { UserRoles } from "../../constants/UserRoles";
 import { User } from "../../models/User";
 import { UserFactory } from "../factories/UserFactory";
-import { Seeder } from "./seeder";
+import { Seeder } from "./Seeder";
 
 export class UserSeeder extends Seeder {
     protected async generate(): Promise<void> {
