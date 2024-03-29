@@ -19,11 +19,11 @@ export class CreateCitasTable1710497679656 implements MigrationInterface {
                         type:"datetime",
                     },
                     {
-                        name:"artist_id",
+                        name:"tatuador_id",
                         type:"int"
                     },
                     {
-                        name:"client_id",
+                        name:"cliente_id",
                         type:"int"
                     },
                     {
@@ -38,12 +38,12 @@ export class CreateCitasTable1710497679656 implements MigrationInterface {
                 ],
                 foreignKeys:[
                     {
-                        columnNames:["artist_id"],
+                        columnNames:["tatuador_id"],
                         referencedTableName: "tatuadores",
                         referencedColumnNames:["id"]
                     },
                     {
-                        columnNames:["client_id"],
+                        columnNames:["cliente_id"],
                         referencedTableName: "clientes",
                         referencedColumnNames:["id"]
                     }

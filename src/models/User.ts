@@ -22,7 +22,7 @@ export class User extends BaseEntity {
     isActive!: boolean;
 
     // Relacion {0..n}--{1} con Roles
-    @ManyToOne(() => Role, (role) => role.user)
+    @ManyToOne(() => Role, (role) => role.users)
     @JoinColumn({ name: "role_id" })
     role!: Role;
 }

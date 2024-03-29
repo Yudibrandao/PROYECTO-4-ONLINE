@@ -4,6 +4,7 @@ import { Tatuador } from "../../models/Tatuador";
 import { Cliente } from "../../models/Cliente";
 import { getRandomValueFromArray } from "../../helpers/common";
 import { Cita } from "../../models/Cita";
+import { CitaFactory } from "../factories/CitasFactory";
 
 export class CitaSeeder extends Seeder {
     protected async generate(): Promise<void> {
@@ -12,10 +13,10 @@ export class CitaSeeder extends Seeder {
         const tatuadores = await Tatuador.find();
         const clientes = await Cliente.find();
 
-        const citas = Cita.createMany(CITAS);
+        const citas = new CitaFactory().createMany(CITAS);
         citas.forEach((cita: Cita) => {
             cita.Tatuador = getRandomValueFromArray(tatuadores);
-            cita.Cliente = getRandomValueFromArray(clientes);
+            cita.cliente = getRandomValueFromArray(clientes);
         });
 
         await Cita.save(citas);

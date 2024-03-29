@@ -19,8 +19,8 @@ export class ClienteSeeder extends Seeder{
             }
         );
         const Clientes = new ClienteFactory().createMany(CLIENTE);
-        Clientes.forEach((Cliente: { user: User; })=>{
-            Cliente.user=getRandomValueFromArray(users)
+        Clientes.forEach((Cliente, index)=>{
+            Cliente.user= users[index]
         })
         await Cliente.save(Clientes);
     } 

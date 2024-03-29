@@ -2,7 +2,7 @@ import { Entity,Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, BaseEntity
 import { User } from "./User"
 import { Cita } from "./Cita"
 
-@Entity('Tatuador')
+@Entity('tatuadores')
 export class Tatuador extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!:number;
@@ -23,7 +23,7 @@ export class Tatuador extends BaseEntity {
     user!:User
 
     // Relation: Tatuador {1}--{0..n} Citas
-    @OneToMany(() => Cita, (Cita) => Cita.Tatuador)
-    Citas?: Cita[];
+    @OneToMany(() => Cita, (cita) => cita.Tatuador)
+    citas?: Cita[];
     
 }

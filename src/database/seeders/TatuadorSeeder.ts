@@ -2,7 +2,6 @@ import { SeederConfig } from "../../config/seeders";
 import { Seeder } from "./Seeder";
 import { Tatuador } from "../../models/Tatuador";
 import { User } from "../../models/User";
-import { getRandomValueFromArray } from "../../helpers/common";
 import { TatuadorFactory } from "../factories/TatuadorFactory";
 
 export class TatuadorSeeder extends Seeder {
@@ -18,8 +17,8 @@ export class TatuadorSeeder extends Seeder {
         });
 
         const tatuadores = new TatuadorFactory().createMany(TATUADORES);
-        tatuadores.forEach((tatuador) => {
-            tatuador.user = getRandomValueFromArray(users);
+        tatuadores.forEach((tatuador, index) => {
+            tatuador.user = users [index];
         });
 
         await Tatuador.save(tatuadores);

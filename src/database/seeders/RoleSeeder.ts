@@ -1,4 +1,4 @@
-import { Seeder } from "./seeder";
+import { Seeder } from "./Seeder";
 import { Role } from "../../models/Role";
 import { UserRoles } from "../../constants/UserRoles";
 
