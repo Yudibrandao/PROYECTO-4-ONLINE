@@ -19,17 +19,17 @@ export class UserSeeder extends Seeder {
        // managers
        const tatuadorUsers = userFactory.createMany(TATUADORES);
        tatuadorUsers.forEach((user) => {
-          user.role = UserRoles.tatuador;
+          user.role = UserRoles.TATUADOR;
        });
  
        // CLIENTE
-       const clientUsers = userFactory.createMany(CLIENTE);
-       clientUsers.forEach((user) => {
-          user.role = UserRoles.CLIENT;
+       const clienteUsers = userFactory.createMany(CLIENTE);
+       clienteUsers.forEach((user) => {
+          user.role = UserRoles.CLIENTE;
        });
  
        // save to database
-       const allUsers = [...adminUsers, ...tatuadorUsers, ...clientUsers];
+       const allUsers = [...adminUsers, ...tatuadorUsers, ...clienteUsers];
        await User.save(allUsers);
     }
  }

@@ -35,12 +35,52 @@ El proyecto fue elaborado para implementar por primera vez un Backend, el ojtivo
 ![Imagen DB](/DiagramaTatto.png)
 
 
-# REQUISITOS DEL PROYECTO 
+# ENDPOINTS DEL PROYECTO
 
 ● Registro de usuarios.
+
+POST http://localhost:3000/api/users/create
+
+{
+                 "firstName": "admin yudith",
+                 "email": "admintyudith1@gmail.com",
+                 "password": "12345678",
+                 "role": "ADMIN"
+            }
+
+
 ● Login de usuarios.
+
+POST http://localhost:3000/api/login
+
+{
+           
+                 "email": "admintyudith1@gmail.com",
+                 "password": "12345678"
+                
+            }
+
+
 ● Perfil de usuario.
+
+GET http://localhost:3000/api/users/profile
+
+{
+	"id": 46,
+	"firstName": "admin yudith",
+	"lastName": null,
+	"email": "admintyudith1@gmail.com",
+	"isActive": true,
+	"role": {
+		"id": 1,
+		"name": "admin"
+	}
+}
+
+
 ● Modificación de datos del perfil.
+
+
 
 ● Creación de citas.
 ● Editar citas.

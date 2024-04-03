@@ -34,9 +34,9 @@ export const TatuadorController = {
 
     async create(req:Request,res:Response){
         try{
-            const {firstName, email, password, phone,style,area} = req.body;
+            const {firstName, email, password,style,area} = req.body;
 
-            if(!firstName || !email || !password || !phone){
+            if(!firstName || !email || !password ){
                 res.status(400).json({message:"Failed to create Tatuador"});
                 return;
             }
@@ -52,7 +52,7 @@ export const TatuadorController = {
                 firstName:firstName,
                 email:email,
                 password:password,
-                role:UserRoles.Tatuador
+                role:UserRoles.TATUADOR
             });
 
             await User.save(user);

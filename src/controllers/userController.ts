@@ -22,8 +22,7 @@ export const userController = {
         try {
             const {firstName,lastName,email,password,isActive,role} = req.body;
             const hashedPassword = await bcrypt.hash(password,10);
-            console.log("role",role)
-            console.log(UserRoles[role])
+           
             const user = User.create({
                 firstName: firstName,
                 lastName: lastName,
@@ -34,7 +33,7 @@ export const userController = {
 
             });
             await user.save();
-            if(role == "CLIENT"){
+            if(role == "CLIENTE"){
 
                 const cliente = Cliente.create({
                     userID: user.id,
@@ -64,7 +63,7 @@ export const userController = {
     async update(req:Request,res:Response){
         try {
             const userId = Number(req.params.id);
-            const {firstName,lastName,email,phone,password,isActive} = req.body;
+            const {firstName,lastName,email,password,isActive} = req.body;
             const user = await User.findOne({where:{id:userId}});
                 
             if(!user){
