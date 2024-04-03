@@ -23,6 +23,6 @@ router.use('/cita', citaRoutes);
 router.use('/auth',authRoutes);
 
 // tatuadore routes
-router.use('/tatuadore',tatuadoreRoutes);
+router.use('/tatuadores',tatuadoreRoutes);
 
 export default router;
