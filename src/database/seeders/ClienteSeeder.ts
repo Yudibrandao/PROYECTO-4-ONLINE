@@ -2,8 +2,8 @@ import { Cliente } from "../../models/Cliente";
 import { Seeder } from "./Seeder";
 import { SeederConfig } from "../../config/seeders";
 import { User } from "../../models/User";
-import { getRandomValueFromArray } from "../../helpers/common";
 import { ClienteFactory } from "../factories/ClienteFactory";
+import { getRandomValueFromArray } from "../../helpers/common";
 
 export class ClienteSeeder extends Seeder{
     protected async generate():Promise <void>{
@@ -18,10 +18,10 @@ export class ClienteSeeder extends Seeder{
                 }
             }
         );
-        const Clientes = new ClienteFactory().createMany(CLIENTE);
-        Clientes.forEach((Cliente, index)=>{
-            Cliente.user= users[index]
+        const clientes = new ClienteFactory().createMany(CLIENTE);
+        clientes.forEach((cliente: {user:User;})=> {
+            cliente.user= getRandomValueFromArray(users)
         })
-        await Cliente.save(Clientes);
+        await Cliente.save(clientes);
     } 
 }

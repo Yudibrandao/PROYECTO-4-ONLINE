@@ -4,7 +4,7 @@ import { UserRoles } from "../constants/UserRoles";
 import { User } from "../models/User";
 
 
-export const TatuadorController = {
+export const tatuadorController = {
     async getAll(req:Request,res:Response){
         try{
             const page = Number(req.query.page) ||1;
@@ -63,7 +63,7 @@ export const TatuadorController = {
                 user:user
             });
 
-            await Tatuador.save(Tatuador);
+            await Tatuador.save(tatuador);
 
             res.status(201).json({message:"Tatuador created succesfully"});
 

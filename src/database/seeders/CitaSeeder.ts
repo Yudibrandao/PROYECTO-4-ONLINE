@@ -8,17 +8,24 @@ import { CitaFactory } from "../factories/CitasFactory";
 
 export class CitaSeeder extends Seeder {
     protected async generate(): Promise<void> {
-        const { TATUADORES, CLIENTE, CITAS } = SeederConfig;
+
+        const { TATUADORES } = SeederConfig;
+        const { CLIENTE } = SeederConfig;
+        const { CITAS } = SeederConfig;
+
 
         const tatuadores = await Tatuador.find();
         const clientes = await Cliente.find();
 
         const citas = new CitaFactory().createMany(CITAS);
-        citas.forEach((cita: Cita) => {
+
+        citas.forEach((cita: { Tatuador: Tatuador; cliente: Cliente; }) => {
             cita.Tatuador = getRandomValueFromArray(tatuadores);
             cita.cliente = getRandomValueFromArray(clientes);
-        });
+        })
 
         await Cita.save(citas);
     }
 }
+
+
