@@ -1,4 +1,4 @@
-import { SeederConfig } from "../../config/seeders";
+import { seederConfig } from "../../config/seeders";
 import { Seeder } from "./Seeder";
 import { Tatuador } from "../../models/Tatuador";
 import { User } from "../../models/User";
@@ -8,7 +8,7 @@ import { getRandomValueFromArray } from "../../helpers/common";
 
 export class TatuadorSeeder extends Seeder {
     protected async generate(): Promise<void> {
-        const { TATUADORES } = SeederConfig;
+        const { TATUADORES } = seederConfig;
 
         const users = await User.find({
             where: {

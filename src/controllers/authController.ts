@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { User } from '../models/User';
-import { UserRoles } from '../constants/UserRoles';
+import { userRoles } from '../constants/UserRoles';
 import { Role } from '../models/Role';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -31,7 +31,7 @@ export const authController = {
               firstName: firstName,
               email: email,
               password : hashedPassword,
-              role: UserRoles.CLIENTE,
+              role: userRoles.CLIENTE,
            });
   
            //save the user in DB

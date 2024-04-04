@@ -1,4 +1,4 @@
-export const SeederConfig = {
+export const seederConfig = {
     
     ADMINS:1,
     USERS:50,

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { UserRoles } from '../constants/UserRoles';
+import { userRoles } from '../constants/UserRoles';
 
 
 
@@ -8,7 +8,7 @@ export const authorizeMiddleware=(allowedRoles:string[])=>{
     return (req:Request,res:Response,next:NextFunction)=>{
         const userRole = req.tokenData.userRole;
         console.log("userRole",userRole)
-        if(userRole === UserRoles.ADMIN.name){
+        if(userRole === userRoles.ADMIN.name){
             return next();
         }
 

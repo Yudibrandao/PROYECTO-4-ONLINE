@@ -1,31 +1,31 @@
-import { SeederConfig } from "../../config/seeders";
-import { UserRoles } from "../../constants/UserRoles";
+import { seederConfig } from "../../config/seeders";
+import { userRoles } from "../../constants/UserRoles";
 import { User } from "../../models/User";
 import { UserFactory } from "../factories/UserFactory";
 import { Seeder } from "./Seeder";
 
 export class UserSeeder extends Seeder {
     protected async generate(): Promise<void> {
-       const { ADMINS, TATUADORES, CLIENTE } = SeederConfig;
+       const { ADMINS, TATUADORES, CLIENTE } = seederConfig;
  
        const userFactory = new UserFactory();
  
        // admins
        const adminUsers = userFactory.createMany(ADMINS);
        adminUsers.forEach((user) => {
-          user.role = UserRoles.ADMIN;
+          user.role = userRoles.ADMIN;
        });
  
        // managers
        const tatuadorUsers = userFactory.createMany(TATUADORES);
        tatuadorUsers.forEach((user) => {
-          user.role = UserRoles.TATUADOR;
+          user.role = userRoles.TATUADOR;
        });
  
        // CLIENTE
        const clienteUsers = userFactory.createMany(CLIENTE);
        clienteUsers.forEach((user) => {
-          user.role = UserRoles.CLIENTE;
+          user.role = userRoles.CLIENTE;
        });
  
        // save to database

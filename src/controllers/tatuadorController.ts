@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Tatuador } from "../models/Tatuador";
-import { UserRoles } from "../constants/UserRoles";
+import { userRoles } from "../constants/UserRoles";
 import { User } from "../models/User";
 
 
@@ -50,7 +50,7 @@ export const tatuadorController = {
                 firstName:firstName,
                 email:email,
                 password:password,
-                role:UserRoles.TATUADOR
+                role:userRoles.TATUADOR
             });
 
             await User.save(user);

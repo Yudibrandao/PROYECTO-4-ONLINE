@@ -23,7 +23,7 @@ export class Tatuador extends BaseEntity {
     user!:User
 
     // Relation: Tatuador {1}--{0..n} Citas
-    @OneToMany(() => Cita, (cita) => cita.Tatuador)
+    @OneToMany(() => Cita, (cita) => cita.tatuador)
     citas?: Cita[];
     
 }

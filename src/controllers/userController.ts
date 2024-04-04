@@ -3,7 +3,7 @@ import { User } from "../models/User";
 import { Tatuador } from "../models/Tatuador";
 import { Cliente } from "../models/Cliente";
 import bcrypt from 'bcrypt';
-import { UserRoles } from "../constants/UserRoles";
+import { userRoles } from "../constants/UserRoles";
 
 
 // interface UserData {
@@ -28,7 +28,7 @@ export const userController = {
                 email: email,
                 password:hashedPassword,
                 isActive:isActive,
-                role:   UserRoles[role]
+                role:   userRoles[role]
 
             });
             await user.save();
@@ -88,8 +88,6 @@ export const userController = {
     //Get all Users Profile
     async getAll(req:Request,res:Response){
         try {
-            const page = Number(req.query.page) || 1;
-            const limit = Number(req.query.limit) || 10;
 
             const [users,totalUsers] = await User.findAndCount(
                 {

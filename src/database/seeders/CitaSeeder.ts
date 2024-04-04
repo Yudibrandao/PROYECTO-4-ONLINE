@@ -1,4 +1,4 @@
-import { SeederConfig } from "../../config/seeders";
+import { seederConfig } from "../../config/seeders";
 import { Seeder } from "./Seeder";
 import { Tatuador } from "../../models/Tatuador";
 import { Cliente } from "../../models/Cliente";
@@ -9,9 +9,9 @@ import { CitaFactory } from "../factories/CitasFactory";
 export class CitaSeeder extends Seeder {
     protected async generate(): Promise<void> {
 
-        const { TATUADORES } = SeederConfig;
-        const { CLIENTE } = SeederConfig;
-        const { CITAS } = SeederConfig;
+        const { TATUADORES } = seederConfig;
+        const { CLIENTE } = seederConfig;
+        const { CITAS } = seederConfig;
 
 
         const tatuadores = await Tatuador.find();

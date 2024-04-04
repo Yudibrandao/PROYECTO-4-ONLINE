@@ -3,7 +3,7 @@ import { Cita } from "../models/Cita";
 import { Tatuador } from "../models/Tatuador";
 import { Cliente } from "../models/Cliente";
 
-export const CitaController = {
+export const citaController = {
 
     //Get all Citas
     async getAll(req: Request, res: Response) {
