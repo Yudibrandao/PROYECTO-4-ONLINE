@@ -30,7 +30,7 @@ router.get('/all', authMiddleware,authorizeMiddleware(["Admin"]), userController
 router.post('/create', userController.create);
 
 //edit user
-router.put('/edit/:id',authMiddleware,authorizeMiddleware, userController.update);
+router.put('/edit/:id',authMiddleware,authorizeMiddleware(["Admin"]), userController.update);
 
 //delete user
 router.delete('/delete/:id',authMiddleware, authorizeMiddleware(["Admin"]),userController.delete);

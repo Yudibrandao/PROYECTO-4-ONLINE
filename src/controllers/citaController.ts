@@ -8,9 +8,7 @@ export const CitaController = {
     //Get all Citas
     async getAll(req: Request, res: Response) {
         try {
-            const page = Number(req.query.page) || 1;
-            const limit = Number(req.query.limit) || 10;
-
+            
             const [Citas, totalCitas] = await Cita.findAndCount({
                 select: {
                     id: true,

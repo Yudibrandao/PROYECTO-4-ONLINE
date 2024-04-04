@@ -7,10 +7,8 @@ import { User } from "../models/User";
 export const tatuadorController = {
     async getAll(req:Request,res:Response){
         try{
-            const page = Number(req.query.page) ||1;
-            const limit = Number(req.query.limit) || 10;
-
-            const Tatuadors = await Tatuador.findAndCount(
+        
+            const tatuadors = await Tatuador.findAndCount(
                 {   
                     relations:{
                         user:true
@@ -25,7 +23,7 @@ export const tatuadorController = {
                     }
                 }
             );
-            res.json(Tatuador);
+            res.json(tatuadors);
 
         }catch(error){
             res.status(500).json({message:"Something went wrong"});
