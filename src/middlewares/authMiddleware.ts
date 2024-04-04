@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import dotenv from 'dotenv';
 
 
 export const authMiddleware = (

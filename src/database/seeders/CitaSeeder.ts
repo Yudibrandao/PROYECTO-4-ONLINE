@@ -18,9 +18,8 @@ export class CitaSeeder extends Seeder {
         const clientes = await Cliente.find();
 
         const citas = new CitaFactory().createMany(CITAS);
-
-        citas.forEach((cita: { Tatuador: Tatuador; cliente: Cliente; }) => {
-            cita.Tatuador = getRandomValueFromArray(tatuadores);
+        citas.forEach((cita) => {
+            cita.tatuador = getRandomValueFromArray(tatuadores);
             cita.cliente = getRandomValueFromArray(clientes);
         })
 

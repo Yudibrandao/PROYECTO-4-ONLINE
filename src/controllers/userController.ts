@@ -1,16 +1,15 @@
 import { Request,Response } from "express";
 import { User } from "../models/User";
-import { Cita } from "../models/Cita";
 import { Tatuador } from "../models/Tatuador";
 import { Cliente } from "../models/Cliente";
-import { Role } from "../models/Role";
 import bcrypt from 'bcrypt';
 import { UserRoles } from "../constants/UserRoles";
+
+
 // interface UserData {
 //     firstName: string,
 //     lastName: string,
-//     email: string,
-//     phone: string,
+//     email: string, 
 //     password: string,
 //     isActive: string;
 //     role: number;

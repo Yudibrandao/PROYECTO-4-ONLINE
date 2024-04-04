@@ -25,7 +25,7 @@ export class Cita extends BaseEntity {
     // Relación: Cita {0..n}--{1} Tatuador
     @ManyToOne(() => Tatuador, (tatuador) => tatuador.citas)
     @JoinColumn({ name: "tatuador_id" })
-    Tatuador!: Tatuador;
+    tatuador!: Tatuador;
 
     // Relación: Cita {0..n}--{1} Cliente
     @ManyToOne(() => Cliente, (cliente) => cliente.id)

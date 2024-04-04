@@ -34,7 +34,7 @@ export const CitaController = {
             const id = Number(req.params.id);
             const cita = await Cita.findOne({
                 relations: {
-                    Tatuador: { user: true },
+                    tatuador: { user: true },
                     cliente: { user: true }
                 },
                 select: {
@@ -42,7 +42,7 @@ export const CitaController = {
                     day_date: true,
                     description: true,
                     price: true,
-                    Tatuador: {
+                    tatuador: {
                         id: true,
                         user: {
                             firstName: true,
@@ -145,7 +145,7 @@ export const CitaController = {
 
             const citas = await Cita.find({
                 relations: {
-                    Tatuador: { user: true },
+                    tatuador: { user: true },
                     cliente: { user: true }
                 },
                 select: {
@@ -153,7 +153,7 @@ export const CitaController = {
                     day_date: true,
                     description: true,
                     price: true,
-                    Tatuador: {
+                    tatuador: {
                         id: true,
                         user: {
                             firstName: true,
@@ -191,7 +191,7 @@ export const CitaController = {
 
             const citas = await Cita.find({
                 relations: {
-                    Tatuador: { user: true },
+                    tatuador: { user: true },
                     cliente: { user: true }
                 },
                 select: {
@@ -199,7 +199,7 @@ export const CitaController = {
                     day_date: true,
                     description: true,
                     price: true,
-                    Tatuador: {
+                    tatuador: {
                         id: true,
                         user: {
                             firstName: true,
