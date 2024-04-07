@@ -31,13 +31,6 @@ export class CreateUsuariosTable1710497679653 implements MigrationInterface {
                      length: "100",
                      isUnique: true,
                   },
-                  {
-                    name: "phone",
-                    type: "integer",
-                    length: "20",
-                    isNullable: true
-                    
-                    },
 
                   {
                      name: "password",

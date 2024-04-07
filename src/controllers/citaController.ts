@@ -9,7 +9,7 @@ export const citaController = {
     async getAll(req: Request, res: Response) {
         try {
             
-            const [Citas, totalCitas] = await Cita.findAndCount({
+            const [citas, totalCitas] = await Cita.findAndCount({
                 select: {
                     id: true,
                     day_date: true,
@@ -18,7 +18,7 @@ export const citaController = {
                 },
             });
 
-            res.json(Citas);
+            res.json(citas);
 
         } catch (error) {
             console.error(error);
@@ -79,13 +79,13 @@ export const citaController = {
                 day_date: day_date,
                 description: description,
                 price: price,
-                TatuadorID: Tatuador,
-                ClienteID: Cliente
-            }).save();
+                tatuadorID: Tatuador,
+                clienteID: Cliente
+            });
 
+            await cita.save();
             res.json(cita);
         } catch (error) {
-            console.error(error);
             res.status(500).json({ message: "Something went wrong" });
         }
     },
@@ -104,8 +104,8 @@ export const citaController = {
             cita.day_date = day_date;
             cita.description = description;
             cita.price = price;
-            cita.TatuadorID = Tatuador;
-            cita.ClienteID = Cliente;
+            cita.tatuadorID = Tatuador;
+            cita.clienteID = Cliente;
             await cita.save();
 
             res.json(cita);
@@ -168,7 +168,7 @@ export const citaController = {
                         }
                     }
                 },
-                where: { ClienteID: logedCliente?.id }
+                where: { clienteID: logedCliente?.id }
             });
 
             res.json(citas);
@@ -214,7 +214,7 @@ export const citaController = {
                         }
                     }
                 },
-                where: { TatuadorID: tatuador?.id }
+                where: { tatuadorID: tatuador?.id }
             });
 
             res.json(citas);

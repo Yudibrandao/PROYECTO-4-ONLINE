@@ -11,10 +11,10 @@ export class Cita extends BaseEntity {
     day_date!: Date;
 
     @Column({ name: "tatuador_id" })
-    TatuadorID!: number;
+    tatuadorID!: number;
 
     @Column({ name: "cliente_id" })
-    ClienteID!: number;
+    clienteID!: number;
 
     @Column({ name: "description" })
     description!: string;
