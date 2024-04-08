@@ -8,7 +8,7 @@ const router = express.Router();
 /////////      tatuadorS ROUTES      //////////////////
 
 // get all tatuadors
-router.get('/',authMiddleware,authorizeMiddleware,tatuadorController.getAll);
+router.get('/',authMiddleware,tatuadorController.getAll);
 
 ///////////     PROTECTED ROUTES    /////////////////////
 

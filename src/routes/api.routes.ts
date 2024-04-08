@@ -1,4 +1,5 @@
 import express from 'express';
+
 import usersRoutes from './users.routes';
 import baseRoutes from './base.routes';
 import citasRoutes from './citas.routes';
@@ -9,6 +10,8 @@ const router = express.Router();
 
 ////// API ROUTES
 
+// base routes
+router.use('/', baseRoutes);
 
 // users routes
 router.use('/users', usersRoutes);
