@@ -2,16 +2,18 @@ import express from 'express';
 import { userController } from '../controllers/userController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { authorizeMiddleware } from '../middlewares/authorize';
-const router = express.Router();
 
+
+
+const router = express.Router();
 
 //////////      PROFILE ROUTES      //////////////////
 
 //get loged user profile
-router.get('/profile/',authMiddleware, userController.getLogedUser);
+router.get('/profile/',authMiddleware,authorizeMiddleware(["Tatuador","Cliente"]), userController.getLogedUser);
 
 //Update loged user profile
-router.put('/profile/update',authMiddleware, userController.updateLogedUser);
+router.put('/profile/update',authMiddleware,authorizeMiddleware(["Tatuador","Cliente"]), userController.updateLogedUser);
 
 
 //get user by id
@@ -27,7 +29,7 @@ router.put('/edit/role/:id',authMiddleware,authorizeMiddleware(["Admin"]), userC
 router.get('/all', authMiddleware,authorizeMiddleware(["Admin"]), userController.getAll);
 
 //Create user
-router.post('/create', userController.create);
+router.post('/create',authMiddleware,authorizeMiddleware(["Admin"]), userController.create);
 
 //edit user
 router.put('/edit/:id',authMiddleware,authorizeMiddleware(["Admin"]), userController.update);

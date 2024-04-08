@@ -3,10 +3,13 @@ import { authController } from '../controllers/authController';
 
 const router = express.Router();
 
-//////////////////////////////////////////a
+//////////////////////////////////////////
+
+//login
 router.post('/login',authController.login)
 
-// router.post('/register',authController.register);
+//register
+router.post('/register',authController.register);
 
 
 export default router;

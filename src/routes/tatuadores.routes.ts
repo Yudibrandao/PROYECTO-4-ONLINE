@@ -1,14 +1,13 @@
 import express,{Request, Response} from 'express';
 import { tatuadorController } from '../controllers/tatuadorController';
 import { authorizeMiddleware } from '../middlewares/authorize';
-import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 
 /////////      tatuadorS ROUTES      //////////////////
 
 // get all tatuadors
-router.get('/',authMiddleware,tatuadorController.getAll);
+router.get('/',authorizeMiddleware(["Tatuador"]),tatuadorController.getAll);
 
 ///////////     PROTECTED ROUTES    /////////////////////
 

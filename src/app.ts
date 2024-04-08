@@ -2,8 +2,6 @@ import express, { Application } from "express";
 import cors from "cors";
 import { corsOptions } from "./config/cors";
 import dotenv from "dotenv";
-
-import { userController } from './controllers/userController';
 import apiRoutes from "./routes/api.routes";
 import baseRoutes from "./routes/base.routes";
 
