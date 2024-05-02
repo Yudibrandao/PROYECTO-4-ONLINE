@@ -1,6 +1,5 @@
 import express from 'express';
 import { citaController } from '../controllers/citaController'; 
-import { de } from '@faker-js/faker';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { authorizeMiddleware } from '../middlewares/authorize';
 const router = express.Router();

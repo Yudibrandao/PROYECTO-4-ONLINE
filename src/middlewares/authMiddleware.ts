@@ -7,8 +7,9 @@ export const authMiddleware = (
     res: Response,
     next: NextFunction
 ) => {
-    // Split the token from the header    n
+    // Split the token from the header    
     const token = req.headers.authorization?.split(" ")[1];
+
 
     // If there is no token, return a 401 status
     if (!token) {
@@ -17,22 +18,26 @@ export const authMiddleware = (
     }
 
     try {
+
         // Verify the token
         const decoded = jwt.verify(
             token,
             process.env.JWT_SECRET as string
         ) as JwtPayload;
 
+        console.log("Decoded token:", decoded);
         // Add the token data to the request    
         req.tokenData = {
             userId: decoded.userId,
-            userRole: decoded.userRole,
+            firstName: decoded.firstName,
+            userRole: decoded.userRole
         }
 
-        // Call the next middleware
+        // Call the next middleware 
         next();
 
     } catch (error) {
+        console.error("Error decoding token:", error);
         res.status(401).json({ message: "No Autorizado" });
         return;
     }

@@ -10,19 +10,18 @@ const router = express.Router();
 
 ////// API ROUTES
 
-// base routes
-router.use('/', baseRoutes);
+
 
 // users routes
 router.use('/users', usersRoutes);
 
-// appointments routes
+// citas routes
 router.use('/citas', citasRoutes);
 
 // auth routes
 router.use('/auth',authRoutes);
 
-// artists routes
+// tatuadores routes
 router.use('/tatuadores',tatuadoresRoutes);
 
 export default router;
