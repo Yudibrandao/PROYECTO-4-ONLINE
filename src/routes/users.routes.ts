@@ -4,21 +4,27 @@ import { authMiddleware } from '../middlewares/authMiddleware';
 import { authorizeMiddleware } from '../middlewares/authorize';
 
 
-
 const router = express.Router();
 
 //////////      PROFILE ROUTES      //////////////////
 
-//get loged user profile
+//get loged user profile  
 router.get('/profile/',authMiddleware, userController.getLogedUser);
 
 router.post('/login/', userController.login);
+
 
 //Update loged user profile
 router.put('/profile/update',authMiddleware, userController.updateLogedUser);
 
 //get user by id
-router.get('/:id',authMiddleware, userController.getProfileById); 
+router.get('/profile/:id',authMiddleware, userController.getProfileById); 
+
+//get all users
+router.get('/all', authMiddleware,authorizeMiddleware(["Admin"]), userController.getAll);
+
+//delete user
+router.delete('/delete',authMiddleware, userController.deleteByToken);
 
 
 ///////////     PROTECTED ROUTES    /////////////////////
@@ -26,17 +32,14 @@ router.get('/:id',authMiddleware, userController.getProfileById);
 //edit user role
 router.put('/edit/role/:id',authMiddleware,authorizeMiddleware(["Admin"]), userController.editUserRole);
 
-//get all users
-router.get('/all', authMiddleware,authorizeMiddleware(["Admin"]), userController.getAll);
-
 //Create user
 router.post('/create', userController.create);
 
 //edit user
 router.put('/edit/:id',authMiddleware,authorizeMiddleware(["admin", "cliente"]), userController.update);
 
-//delete user
-router.delete('/delete/:id',authMiddleware, authorizeMiddleware(["Admin"]),userController.delete);
+// //delete user
+// router.delete('/delete/:id',authMiddleware, authorizeMiddleware(["admin", "cliente"]),userController.delete);
 
 
 export default router;

@@ -20,25 +20,32 @@ export const userController = {
     //REGISTER
     async create(req: Request, res: Response) {
         try {
-            const { firstName, lastName, email, password, isActive, role } = req.body;
+            let { firstName, lastName, email, password, isActive, role } = req.body;
             const hashedPassword = await bcrypt.hash(password, 10);
+
+            if (role !== "CLIENTE" || role !== "TATUADOR") {
+                role = "CLIENTE"
+            }
 
             const user = User.create({
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 password: hashedPassword,
-                isActive: isActive,
+                isActive: true,
                 role: userRoles[role]
 
             });
-            console.log(user);
+
             await user.save();
+
+            console.log(user)
+
             if (role == "CLIENTE") {
 
                 const cliente = Cliente.create({
                     userID: user.id,
-                    area: "Cliente"
+                    area: "CLIENTE"
                 })
                 await cliente.save();
             }
@@ -52,6 +59,7 @@ export const userController = {
                 await tatuador.save();
             }
 
+            // await user.save();
 
             res.status(200).json({ message: "User created successfully" });
         } catch (error) {
@@ -66,30 +74,26 @@ export const userController = {
         try {
             const { email, password } = req.body;
 
-
-            const userLogin = await User.findOne({ where: { email: email }, select: ["id","firstName","role_id","password"] });
+            const userLogin = await User.findOne({ where: { email: email }, select: ["id", "firstName", "role_id", "password"] });
 
             if (!userLogin) {
                 // Lanza un error con un código de estado HTTP personalizado
                 return res.status(500).json({ message: "Usuario no encontrado" });
             }
 
-
             const isPasswordValid = await bcrypt.compare(password, userLogin.password);
             if (!isPasswordValid) {
                 // Lanza un error con un código de estado HTTP personalizado
                 return res.status(500).json({ message: "Usuario o contraseña erronea" });
 
-            } 
+            }
 
             // Payload
-            const tokenPayload: TokenData = { 
+            const tokenPayload: TokenData = {
                 userId: userLogin.id,
                 firstName: userLogin.firstName,
                 userRole: String(userLogin.role_id),
             };
-          
-          
 
             const token = jwt.sign(
                 tokenPayload,
@@ -104,6 +108,7 @@ export const userController = {
         }
     },
 
+
     //EDIT PROFILE
     async update(req: Request, res: Response) {
         try {
@@ -115,6 +120,8 @@ export const userController = {
                 res.status(404).json({ message: "User not found" });
                 return;
             }
+
+
             user.firstName = firstName;
             user.lastName = lastName;
             user.email = email;
@@ -128,14 +135,13 @@ export const userController = {
     },
 
 
-
-
     //FIXME: JUST FOR ADMINS
     //Get all Users Profile
     async getAll(req: Request, res: Response) {
         try {
+            
+            const users= await User.findAndCount(
 
-            const [users, totalUsers] = await User.findAndCount(
                 {
                     select: {
                         id: true,
@@ -147,13 +153,14 @@ export const userController = {
                     }
                 }
             );
+            console.log(users)
             res.json(users);
         } catch (error) {
             res.status(500).json({ message: "Something went wrong" });
         }
     },
 
-    //Get User Profile by ID
+    // Get User Profile by ID
     async getProfileById(req: Request, res: Response) {
         try {
             const userId = Number(req.params.id);
@@ -164,7 +171,6 @@ export const userController = {
                 },
                 where: { id: userId },
             });
-
 
 
             if (!user) {
@@ -182,7 +188,38 @@ export const userController = {
     },
 
     //DELETE PROFILE
+    async deleteByToken(req: Request, res: Response) {
+       
+        try {
+            //take the id from the request
+            const tokenUser=  (req.tokenData);
+            console.log(tokenUser.userId)
+            console.log("Hola")
+
+
+            
+            //find the user by id
+            const user = await User.findOne({ where: { id: tokenUser.userId} });
+
+            console.log(user)
+            //if the user is not found, return a 404 status
+            if (!user) {
+                res.status(404).json({ message: "User not found" });
+                return;
+            }
+            //remove the user
+            await user.remove();
+            //return a 200 status
+            res.status(200).json({ message: "User deleted successfully" });
+        } catch (error) {
+            console.error(error);
+            //if something goes wrong, return a 500 status
+            res.status(500).json({ message: "Something went wrong" });
+        }
+    },
+
     async delete(req: Request, res: Response) {
+        console.log("chao")
         try {
             //take the id from the request
             const userId = Number(req.params.id);
@@ -204,13 +241,14 @@ export const userController = {
         }
     },
 
+
     async getLogedUser(req: Request, res: Response, next: NextFunction) {
         try {
 
             const { userId, firstName, userRole } = req.tokenData;
-          
-         
-            const userLogin = await User.findOne({ where: { id: userId }, select: ["id","firstName","lastName","role_id","password","email"] });
+
+
+            const userLogin = await User.findOne({ where: { id: userId }, select: ["id", "firstName", "lastName", "role_id", "password", "email"] });
 
             if (!userLogin) {
                 // Lanza un error con un código de estado HTTP personalizado
