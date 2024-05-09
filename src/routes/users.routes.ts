@@ -29,11 +29,14 @@ router.delete('/delete',authMiddleware, userController.deleteByToken);
 
 ///////////     PROTECTED ROUTES    /////////////////////
 
-//edit user role
-router.put('/edit/role/:id',authMiddleware,authorizeMiddleware(["Admin"]), userController.editUserRole);
+//editar usuarios Admin
+router.put('/admin/editarUsuario/:id', authMiddleware, authorizeMiddleware(["admin"]), userController.updateUserAdmin); 
 
 //Create user
 router.post('/create', userController.create);
+
+//edit user role
+router.put('/edit/role/:id',authMiddleware,authorizeMiddleware(["Admin"]), userController.editUserRole);
 
 //edit user
 router.put('/edit/:id',authMiddleware,authorizeMiddleware(["admin", "cliente"]), userController.update);

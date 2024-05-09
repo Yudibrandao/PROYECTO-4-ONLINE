@@ -121,7 +121,6 @@ export const userController = {
                 return;
             }
 
-
             user.firstName = firstName;
             user.lastName = lastName;
             user.email = email;
@@ -135,8 +134,8 @@ export const userController = {
     },
 
 
-    //FIXME: JUST FOR ADMINS
-    //Get all Users Profile
+    //solo para administrador 
+    //Obtener el perfil de los usuarios 
     async getAll(req: Request, res: Response) {
         try {
 
@@ -160,7 +159,7 @@ export const userController = {
         }
     },
 
-    // Get User Profile by ID
+    // Obtener el perfil del usuario por Id
     async getProfileById(req: Request, res: Response) {
         try {
             const userId = Number(req.params.id);
@@ -187,7 +186,7 @@ export const userController = {
         }
     },
 
-    //DELETE PROFILE
+    //borrar perfil 
     async deleteByToken(req: Request, res: Response) {
 
         try {
@@ -216,7 +215,7 @@ export const userController = {
     },
 
     async delete(req: Request, res: Response) {
-        console.log("chao")
+       
         try {
             //take the id from the request
             const userId = Number(req.params.id);
@@ -262,7 +261,7 @@ export const userController = {
     async updateLogedUser(req: Request, res: Response) {
         try {
             const userId = req.tokenData?.userId;
-            const { firstName, lastName, email, isActive } = req.body;
+            const { firstName, lastName, email, isActive, role } = req.body;
             const user = await User.findOne({ where: { id: userId } });
 
             if (!user) {
@@ -274,6 +273,7 @@ export const userController = {
             user.lastName = lastName;
             user.email = email;
             user.isActive = isActive;
+            user.role_id = role;
 
             await user.save();
             res.status(200).json(user);
@@ -326,6 +326,41 @@ export const userController = {
             console.log(error);
             res.status(500).json({ message: "Something went wrong" });
         }
+    }, 
+
+    async updateUserAdmin(req: Request, res: Response) {
+        try {
+            const tokenUser = req.tokenData;
+    
+            if (!tokenUser || tokenUser.userRole !== "1") {
+                return res.status(403).json({ message: "Sin permiso del Administrador" });
+            }
+            
+            const userId = Number(req.params.id);
+            const { firstName, lastName, email, password, isActive, role, day_date, description, price, Tatuador, Cliente } = req.body;
+            
+            // Actualizar los campos del usuario
+            let user = await User.findOne({ where: { id: userId } });
+            if (!user) {
+                return res.status(404).json({ message: "Usuario no encontrado" });
+            }
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.email = email;
+            user.password = password;
+            user.isActive = isActive;
+            user.role = userRoles[role];
+    
+            await user.save();
+    
+        
+    
+            res.status(200).json({ message: "Usuario actualizado exitosamente" });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Algo salió mal" });
+        }
     }
+    
 
 }

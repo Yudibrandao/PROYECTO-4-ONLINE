@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import { Cita } from "../models/Cita";
 import { Tatuador } from "../models/Tatuador";
 import { Cliente } from "../models/Cliente";
+import { Admin } from "typeorm";
+import { Role } from "../models/Role";
+import { userRoles } from "../constants/UserRoles";
+import { User } from "../models/User";
 
 export const citaController = {
 
@@ -125,12 +129,12 @@ export const citaController = {
     async updateCitasAdmin(req: Request, res: Response) {
         try {
             const tokenUser = (req.tokenData);
-            
+
             if (tokenUser.userRole != "1") {
                 return res.status(404).json({ message: "Sin permisos" });
             }
             const id = Number(req.params.id);
-            const { day_date, description, price, Tatuador, Cliente, isActive} = req.body;
+            const { day_date, description, price, Tatuador, Cliente, isActive } = req.body;
             let cita = await Cita.findOne({ where: { id: id } });
             if (!cita) {
                 return res.status(404).json({ message: "Cita not found" });
@@ -151,18 +155,18 @@ export const citaController = {
             res.status(500).json({ message: "Something went wrong" });
         }
     },
- 
+
     //editar citas cliente
     async updateCitasCliente(req: Request, res: Response) {
         try {
             const tokenUser = (req.tokenData);
-            
+
             if (tokenUser.userRole != "3") {
                 return res.status(404).json({ message: "Sin permisos" });
             }
             const id = Number(req.params.id);
-            const { day_date, description, price, Tatuador, Cliente, isActive} = req.body;
-            let cita = await Cita.findOne({ where: { id: id, clienteID:tokenUser.userId } });
+            const { day_date, description, price, Tatuador, Cliente, isActive } = req.body;
+            let cita = await Cita.findOne({ where: { id: id, clienteID: tokenUser.userId } });
             if (!cita) {
                 return res.status(404).json({ message: "Cita not found" });
             }
@@ -184,36 +188,38 @@ export const citaController = {
     },
 
 
-        //editar citas tatuador
-        async updateCitasTatuador(req: Request, res: Response) {
-            try {
-                const tokenUser = (req.tokenData);
-                
-                if (tokenUser.userRole != "2") {
-                    return res.status(404).json({ message: "Sin permisos" });
-                }
-                const id = Number(req.params.id);
-                const { day_date, description, price, Tatuador, Cliente, isActive} = req.body;
-                let cita = await Cita.findOne({ where: { id: id , tatuadorID: tokenUser.userId} });
-                if (!cita) {
-                    return res.status(404).json({ message: "Cita not found" });
-                }
-    
-                cita.day_date = day_date;
-                cita.description = description;
-                cita.price = price;
-                cita.tatuadorID = Tatuador;
-                cita.clienteID = Cliente;
-                cita.isActive = isActive
-    
-                await cita.save();
-    
-                res.json(cita);
-            } catch (error) {
-                console.error(error);
-                res.status(500).json({ message: "Something went wrong" });
+    //editar citas tatuador
+    async updateCitasTatuador(req: Request, res: Response) {
+        try {
+            const tokenUser = (req.tokenData);
+
+            if (tokenUser.userRole != "2") {
+                return res.status(404).json({ message: "Sin permisos" });
             }
-        },
+            const id = Number(req.params.id);
+            const { day_date, description, price, Tatuador, Cliente, isActive } = req.body;
+            let cita = await Cita.findOne({ where: { id: id, tatuadorID: tokenUser.userId } });
+            if (!cita) {
+                return res.status(404).json({ message: "Cita not found" });
+            }
+
+            cita.day_date = day_date;
+            cita.description = description;
+            cita.price = price;
+            cita.tatuadorID = Tatuador;
+            cita.clienteID = Cliente;
+            cita.isActive = isActive
+
+            await cita.save();
+
+            res.json(cita);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Something went wrong" });
+        }
+    },
+    
+
 
     // Delete Cita
     async delete(req: Request, res: Response) {

@@ -2,6 +2,7 @@ import express from 'express';
 import { citaController } from '../controllers/citaController'; 
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { authorizeMiddleware } from '../middlewares/authorize';
+import { userController } from '../controllers/userController';
 const router = express.Router();
 
 /////////      CITAS ROUTES      //////////////////
@@ -24,6 +25,8 @@ router.get('/admin/listaCitas', authMiddleware, authorizeMiddleware(["Admin"]), 
 
 //get all citas
 router.get('/', authMiddleware, authorizeMiddleware(["Admin"]), citaController.getAll); 
+
+
 
 //editar citas cliente
 router.put('/cliente/editarCita/:id', authMiddleware, authorizeMiddleware(["cliente"]), citaController.updateCitasCliente); 
