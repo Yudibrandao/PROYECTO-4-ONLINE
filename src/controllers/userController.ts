@@ -139,8 +139,8 @@ export const userController = {
     //Get all Users Profile
     async getAll(req: Request, res: Response) {
         try {
-            
-            const users= await User.findAndCount(
+
+            const users = await User.findAndCount(
 
                 {
                     select: {
@@ -189,26 +189,23 @@ export const userController = {
 
     //DELETE PROFILE
     async deleteByToken(req: Request, res: Response) {
-       
+
         try {
             //take the id from the request
-            const tokenUser=  (req.tokenData);
-            console.log(tokenUser.userId)
-            console.log("Hola")
+            const tokenUser = (req.tokenData);
 
-
-            
             //find the user by id
-            const user = await User.findOne({ where: { id: tokenUser.userId} });
+            const user = await User.findOne({ where: { id: tokenUser.userId } });
 
             console.log(user)
-            //if the user is not found, return a 404 status
             if (!user) {
                 res.status(404).json({ message: "User not found" });
                 return;
             }
+            user.isActive = false
+           
             //remove the user
-            await user.remove();
+             await user.save();
             //return a 200 status
             res.status(200).json({ message: "User deleted successfully" });
         } catch (error) {

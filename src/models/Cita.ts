@@ -22,6 +22,9 @@ export class Cita extends BaseEntity {
     @Column({ name: "price" })
     price!: number;
 
+    @Column({ name: "is_active" })
+    isActive!: boolean;
+
     // Relación: Cita {0..n}--{1} Tatuador
     @ManyToOne(() => Tatuador, (tatuador) => tatuador.citas)
     @JoinColumn({ name: "tatuador_id" })
