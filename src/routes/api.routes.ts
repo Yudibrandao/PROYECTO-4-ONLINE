@@ -10,8 +10,6 @@ const router = express.Router();
 
 ////// API ROUTES
 
-
-
 // users routes
 router.use('/users', usersRoutes);
 
