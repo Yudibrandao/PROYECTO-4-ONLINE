@@ -37,7 +37,7 @@ export const authMiddleware = (
         next();
 
     } catch (error) {
-        console.error("Error decoding token:", error);
+        console.error("Error al decodificar el token:", error);
         res.status(401).json({ message: "No Autorizado" });
         return;
     }

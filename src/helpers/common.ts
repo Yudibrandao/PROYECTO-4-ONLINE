@@ -21,7 +21,7 @@ export const getRandomValueFromArray = <T>(array: T[]): T => {
 export const getRandomSubarray = <T>(array: T[], length: number): T[] => {
    if (length > array.length) {
       throw new Error(
-         "The requested length is greater than the length of the array."
+         "La longitud es mayor a la requerida."
       );
    }
 

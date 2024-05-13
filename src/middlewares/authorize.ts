@@ -17,7 +17,7 @@ export const authorizeMiddleware = (allowedRoles: string[]) => {
         } else if (allowedRoles.includes(userRoles.CLIENTE.name)) {
             return next();
         } else {
-            res.status(401).json({ message: "Unauthorized" })
+            res.status(401).json({ message: "No autorizado" })
         }
     }
 }

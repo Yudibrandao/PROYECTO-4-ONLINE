@@ -26,7 +26,7 @@ export const tatuadorController = {
             res.json(tatuadors);
 
         }catch(error){
-            res.status(500).json({message:"Something went wrong"});
+            res.status(500).json({message:"Algo salio mal"});
         }
     },
 
@@ -35,14 +35,14 @@ export const tatuadorController = {
             const {firstName, email, password,style,area} = req.body;
 
             if(!firstName || !email || !password ){
-                res.status(400).json({message:"Failed to create Tatuador"});
+                res.status(400).json({message:"No se pudo crear el tatuador"});
                 return;
             }
 
             const userExists = await User.findOne({where:{email:email}});
 
             if(userExists){
-                res.status(400).json({message:"Email already in use"});
+                res.status(400).json({message:"Email no valido"});
                 return;
             }
 
@@ -63,7 +63,7 @@ export const tatuadorController = {
 
             await Tatuador.save(tatuador);
 
-            res.status(201).json({message:"Tatuador created succesfully"});
+            res.status(201).json({message:"Tatuador creado con exito"});
 
 
         }catch(error){}

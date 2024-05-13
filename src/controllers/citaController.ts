@@ -26,7 +26,7 @@ export const citaController = {
 
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -65,13 +65,13 @@ export const citaController = {
             });
 
             if (!cita) {
-                return res.status(404).json({ message: "Cita not found" });
+                return res.status(404).json({ message: "Cita no encontrada" });
             }
 
             res.json(cita);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -121,7 +121,7 @@ export const citaController = {
             }
 
         } catch (error) {
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -137,7 +137,7 @@ export const citaController = {
             const { day_date, description, price, Tatuador, Cliente, isActive } = req.body;
             let cita = await Cita.findOne({ where: { id: id } });
             if (!cita) {
-                return res.status(404).json({ message: "Cita not found" });
+                return res.status(404).json({ message: "Cita no encontrada" });
             }
 
             cita.day_date = day_date;
@@ -152,7 +152,7 @@ export const citaController = {
             res.json(cita);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -168,7 +168,7 @@ export const citaController = {
             const { day_date, description, price, Tatuador, Cliente, isActive } = req.body;
             let cita = await Cita.findOne({ where: { id: id, clienteID: tokenUser.userId } });
             if (!cita) {
-                return res.status(404).json({ message: "Cita not found" });
+                return res.status(404).json({ message: "Cita no encontrada" });
             }
 
             cita.day_date = day_date;
@@ -183,7 +183,7 @@ export const citaController = {
             res.json(cita);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -215,7 +215,7 @@ export const citaController = {
             res.json(cita);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
     
@@ -228,14 +228,14 @@ export const citaController = {
             const cita = await Cita.findOne({ where: { id: id } });
 
             if (!cita) {
-                return res.status(404).json({ message: "Cita not found" });
+                return res.status(404).json({ message: "Cita no encontrada" });
             }
 
             await cita.remove();
-            res.json({ message: "Cita deleted" });
+            res.json({ message: "Cita borrada" });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -277,7 +277,7 @@ export const citaController = {
             res.json(citas);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -320,7 +320,7 @@ export const citaController = {
             res.json(citas);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -363,7 +363,7 @@ export const citaController = {
             res.json(citas);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 

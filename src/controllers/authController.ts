@@ -17,7 +17,7 @@ export const authController = {
             //check if values are provided
            if(!firstName || !email || !password){
               res.status(400).json({ 
-                 message: "Failed to create user",         
+                 message: "No se pudo crear el usuario",         
             });
               return;
            }
@@ -37,14 +37,14 @@ export const authController = {
            //save the user in DB
            await User.save(userToCreate);
 
-           res.status(201).json({ message: "User created succesfully" });
+           res.status(201).json({ message: "Usuario creado con exito" });
   
         } catch (error) {
             //if something goes wrong, return a 500 status
             
            res.status(500).json({
             
-              message: "Failed to create user",
+              message: "No se pudo crear el usuario",
             
            });
            
@@ -52,67 +52,4 @@ export const authController = {
      },
   
 
-    // async login(req: Request, res: Response): Promise<void> {
-    //     try{
-
-    //         // Get email and password from request body
-    //         const { email, password } = req.body;
-
-    //         // Check if email and password are provided
-    //         if (!email || !password) {
-    //             res.status(400).json({ message: "Email and password are required" });
-    //             return;
-    //         }
-
-    //         // Find user wich email is equal to the email provided
-    //         const user = await User.findOne({
-    //             relations:{role:true},
-    //             select:{
-    //                 id:true,
-    //                 email:true,
-    //                 password:true} ,
-    //             where: {
-    //                 email: email
-    //             }});
-
-    //         // Check if user exists
-    //         if (!user) {
-    //             res.status(400).json({ message: "Bad Credentials" });
-    //             return;
-    //         }
-
-    //         // Check if password is valid
-    //         const isValidPassword = bcrypt.compareSync(password, user.password);
-
-    //         // Check if password is valid
-    //         if (!isValidPassword) {
-    //             res.status(400).json({ message: "Bad Credentials" });
-    //             return;
-    //         }
-
-    //         // Get user role name
-    //         const userRoleName = user.role.name;
-           
-    //         // Payload
-    //         const tokenPayload: TokenData = {
-    //             userId: user.id,
-    //             firstName: user.firstName,
-    //             userRole: userRoleName,
-    //         };
-    //         // Generate token
-    //         const token = jwt.sign(tokenPayload,process.env.JWT_SECRET as string,{
-    //         expiresIn: "3h",
-    //      })
-
-    //         res.json({ message: "Login succesfully",token }).status(200);
-
-    //     }catch(error){
-    //         console.log(error);
-    //         res.status(500).json({
-    //            message: "Failed to create user",
-             
-    //         });
-               
-    //     }
-    // },
 }
