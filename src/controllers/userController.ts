@@ -74,13 +74,20 @@ export const userController = {
         try {
             const { email, password } = req.body;
 
-            const userLogin = await User.findOne({ where: { email: email }, select: ["id", "firstName", "role_id", "password"] });
+            const userLogin = await User.findOne({ where: { email: email }, select: ["id", "firstName", "role_id", "password", "isActive"] });
 
             if (!userLogin) {
                 // Lanza un error con un código de estado HTTP personalizado
                 return res.status(500).json({ message: "Usuario no encontrado" });
             }
+           
+            if (userLogin.isActive === false) {
+                // Lanza un error con un código de estado HTTP personalizado
+                return res.status(300).json({ message: "Usuario bloqueado" });
+            }
 
+
+            
             const isPasswordValid = await bcrypt.compare(password, userLogin.password);
             if (!isPasswordValid) {
                 // Lanza un error con un código de estado HTTP personalizado
