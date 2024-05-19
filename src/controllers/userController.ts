@@ -162,7 +162,7 @@ export const userController = {
             console.log(users)
             res.json(users);
         } catch (error) {
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -180,7 +180,7 @@ export const userController = {
 
 
             if (!user) {
-                res.status(404).json({ message: "User not found" });
+                res.status(404).json({ message: "Usuario no encontado" });
                 return;
             }
 
@@ -188,7 +188,7 @@ export const userController = {
         } catch (error) {
 
             res.status(500).json({
-                message: "Failed to retrieve user",
+                message: "No se pudo recuperar el usuario",
             });
         }
     },
@@ -205,7 +205,7 @@ export const userController = {
 
             console.log(user)
             if (!user) {
-                res.status(404).json({ message: "User not found" });
+                res.status(404).json({ message: "Usuario no encontrado" });
                 return;
             }
             user.isActive = false
@@ -213,11 +213,11 @@ export const userController = {
             //remove the user
              await user.save();
             //return a 200 status
-            res.status(200).json({ message: "User deleted successfully" });
+            res.status(200).json({ message: "Usuario eliminado exitosamente" });
         } catch (error) {
             console.error(error);
             //if something goes wrong, return a 500 status
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -230,17 +230,17 @@ export const userController = {
             const user = await User.findOne({ where: { id: userId } });
             //if the user is not found, return a 404 status
             if (!user) {
-                res.status(404).json({ message: "User not found" });
+                res.status(404).json({ message: "Usuario no encontrado" });
                 return;
             }
             //remove the user
             await user.remove();
             //return a 200 status
-            res.status(200).json({ message: "User deleted successfully" });
+            res.status(200).json({ message: "Usuario eliminado exitosamente" });
         } catch (error) {
             console.error(error);
             //if something goes wrong, return a 500 status
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -261,7 +261,7 @@ export const userController = {
             res.status(200).json({ message: userLogin });
 
         } catch (error) {
-            res.status(500).json({ message: "Something went wrong11" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -272,7 +272,7 @@ export const userController = {
             const user = await User.findOne({ where: { id: userId } });
 
             if (!user) {
-                res.status(404).json({ message: "User not found" });
+                res.status(404).json({ message: "Usuario no encontrado" });
                 return;
             }
 
@@ -285,7 +285,7 @@ export const userController = {
             await user.save();
             res.status(200).json(user);
         } catch (error) {
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     },
 
@@ -316,7 +316,7 @@ export const userController = {
                 })
             //if the user is not found, return a 404 status
             if (!userToChange) {
-                res.status(404).json({ message: "User not found" });
+                res.status(404).json({ message: "Usuario no encontrado" });
                 return;
             }
 
@@ -327,11 +327,11 @@ export const userController = {
             await User.save(userToChange);
 
             //return a 200 status
-            res.status(200).json({ message: "Role updated successfully" });
+            res.status(200).json({ message: "Rol actualizado exitosamente" });
 
         } catch (error) {
             console.log(error);
-            res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Algo salio mal" });
         }
     }, 
 

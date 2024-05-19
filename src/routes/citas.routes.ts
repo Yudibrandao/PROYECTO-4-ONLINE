@@ -18,7 +18,7 @@ router.get('/cliente/cita', authMiddleware, authorizeMiddleware(["cliente"]), ci
 router.get('/tatuador/cita', authMiddleware, authorizeMiddleware(["tatuador"]), citaController.getByLogedTatuador); 
 
 //lista Citas Admin
-router.get('/admin/listaCitas', authMiddleware, authorizeMiddleware(["Admin"]), citaController.getByLogedAdmin); 
+router.get('/admin/listaCitas', authMiddleware, authorizeMiddleware(["Admin", "cliente"]), citaController.getByLogedAdmin); 
 
 
 //////////////////// PROTECTED ROUTES //////////////////////

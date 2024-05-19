@@ -16,7 +16,8 @@ export class CreateCitasTable1710497679656 implements MigrationInterface {
                     },
                     {
                         name:"day_date",
-                        type:"datetime",
+                        type:"varchar",
+                        length:"200"
                     },
                     {
                         name:"tatuador_id",
@@ -40,12 +41,12 @@ export class CreateCitasTable1710497679656 implements MigrationInterface {
                     {
                         columnNames:["tatuador_id"],
                         referencedTableName: "tatuadores",
-                        referencedColumnNames:["id"]
+                        referencedColumnNames:["user_id"]
                     },
                     {
                         columnNames:["cliente_id"],
                         referencedTableName: "clientes",
-                        referencedColumnNames:["id"]
+                        referencedColumnNames:["user_id"]
                     }
                 ]
             })

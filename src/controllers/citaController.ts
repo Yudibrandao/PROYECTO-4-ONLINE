@@ -80,48 +80,49 @@ export const citaController = {
         try {
             //take the id from the request
             const tokenUser = (req.tokenData);
-            console.log(tokenUser.userRole);
-            const { day_date, description, price, Tatuador, Cliente } = req.body;
+            const { day_date, description, price, Tatuador, cliente } = req.body;
 
-            if (tokenUser.userRole == "3") {
+            // if (tokenUser.userRole == "3") {
 
+            //     const cita = await Cita.create({
+            //         day_date: day_date,
+            //         description: description,
+            //         price: price,
+            //         tatuadorID: Tatuador,
+            //         clienteID: tokenUser.userId
+            //     });
+            //     await cita.save();
+            //     res.json(cita);
+            // }
+            // if (tokenUser.userRole == "2") {
+
+            //     const cita = await Cita.create({
+            //         day_date: day_date,
+            //         description: description,
+            //         price: price,
+            //         tatuadorID: tokenUser.userId,
+            //         clienteID: tokenUser.userId
+            //     });
+            //     await cita.save();
+            //     res.json(cita);
+            // }
+            // if (tokenUser.userRole == "1") {
+               
                 const cita = await Cita.create({
                     day_date: day_date,
-                    description: description,
-                    price: price,
                     tatuadorID: Tatuador,
-                    clienteID: tokenUser.userId
-                });
-                await cita.save();
-                res.json(cita);
-            }
-            if (tokenUser.userRole == "2") {
-
-                const cita = await Cita.create({
-                    day_date: day_date,
+                    clienteID: tokenUser.userId,
                     description: description,
-                    price: price,
-                    tatuadorID: tokenUser.userId,
-                    clienteID: Cliente
+                    price: price
+                
                 });
+                console.log (cita)
                 await cita.save();
                 res.json(cita);
-            }
-            if (tokenUser.userRole == "1") {
-
-                const cita = await Cita.create({
-                    day_date: day_date,
-                    description: description,
-                    price: price,
-                    tatuadorID: Tatuador,
-                    clienteID: Cliente
-                });
-                await cita.save();
-                res.json(cita);
-            }
+            // }
 
         } catch (error) {
-            res.status(500).json({ message: "Algo salio mal" });
+            res.status(500).json({ message: error });
         }
     },
 
@@ -145,7 +146,7 @@ export const citaController = {
             cita.price = price;
             cita.tatuadorID = Tatuador;
             cita.clienteID = Cliente;
-            cita.isActive = isActive
+            // cita.isActive = isActive
 
             await cita.save();
 
@@ -176,7 +177,7 @@ export const citaController = {
             cita.price = price;
             cita.tatuadorID = Tatuador;
             cita.clienteID = Cliente;
-            cita.isActive = isActive
+            // cita.isActive = isActive
 
             await cita.save();
 
@@ -200,7 +201,7 @@ export const citaController = {
             const { day_date, description, price, Tatuador, Cliente, isActive } = req.body;
             let cita = await Cita.findOne({ where: { id: id, tatuadorID: tokenUser.userId } });
             if (!cita) {
-                return res.status(404).json({ message: "Cita not found" });
+                return res.status(404).json({ message: "Cita no econtrada" });
             }
 
             cita.day_date = day_date;
@@ -208,7 +209,7 @@ export const citaController = {
             cita.price = price;
             cita.tatuadorID = Tatuador;
             cita.clienteID = Cliente;
-            cita.isActive = isActive
+            // cita.isActive = isActive
 
             await cita.save();
 
@@ -243,7 +244,6 @@ export const citaController = {
     async getByLogedCliente(req: Request, res: Response) {
         try {
 
-
             const citas = await Cita.find({
                 relations: {
                     tatuador: { user: true },
@@ -259,7 +259,6 @@ export const citaController = {
                         user: {
                             firstName: true,
                             email: true,
-
                         }
                     },
                     cliente: {
